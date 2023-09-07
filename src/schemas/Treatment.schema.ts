@@ -6,15 +6,20 @@ const MedicationInTreatmentSchema: Schema = new mongoose.Schema({
     medicamentId: { type: mongoose.Schema.Types.ObjectId, ref: 'Medicament' },
     schedule: {
         type: [String],  // Array of hours
-        validate: {
-            validator: function(schedule: string[]) {
+        validate: [{
+            validator: function (schedule: string[]) {
                 return schedule.every(hour => /^([0-1]?[0-9]|2[0-3]):[0-5][0-9]$/.test(hour));
             },
             message: (props: { value: string[] }) => `${props.value} is not a valid hour format!`
         },
+        {
+            validator: function (schedule: string[]) {
+                return schedule.length > 0;
+            },
+            message: 'At least one schedule time is required for each medication.'
+        }],
         required: [true, 'Schedule is required.']
-    },
-    taken: { type: Boolean, default: false }
+    }, taken: { type: Boolean, default: false }
 });
 
 const TreatmentSchema: Schema = new mongoose.Schema({
