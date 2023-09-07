@@ -1,0 +1,76 @@
+import { Request, Response } from 'express';
+import * as TreatmentService from '../services/treatment.service'
+
+export const createTreatment = async (req: Request, res: Response) => {
+    try {
+        const treatment = await TreatmentService.createTreatment(req.body);
+        res.status(201).json(treatment);
+    } catch (error) {
+        res.status(500).json({ message: 'Error creating treatment' });
+    }
+};
+
+export const modifyTreatment = async (req: Request, res: Response) => {
+    try {
+        const treatment = await TreatmentService.modifyTreatment(req.params.id, req.body);
+        if (treatment) {
+            res.status(200).json(treatment);
+        } else {
+            res.status(404).json({ message: 'Treatment not found' });
+        }
+    } catch (error) {
+        res.status(500).json({ message: 'Error modifying treatment' });
+    }
+};
+
+export const deleteTreatment = async (req: Request, res: Response) => {
+    try {
+        const treatment = await TreatmentService.deleteTreatment(req.params.id);
+        if (treatment) {
+            res.status(200).json({ message: 'Treatment deleted successfully' });
+        } else {
+            res.status(404).json({ message: 'Treatment not found' });
+        }
+    } catch (error) {
+        res.status(500).json({ message: 'Error deleting treatment' });
+    }
+};
+
+export const deleteMedicationFromTreatment = async (req: Request, res: Response) => {
+    try {
+        const treatment = await TreatmentService.deleteMedicationFromTreatment(req.params.treatmentId, req.params.medicationId);
+        if (treatment) {
+            res.status(200).json(treatment);
+        } else {
+            res.status(404).json({ message: 'Medication not found in treatment' });
+        }
+    } catch (error) {
+        res.status(500).json({ message: 'Error deleting medication from treatment' });
+    }
+};
+
+export const setMedicationSchedule = async (req: Request, res: Response) => {
+    try {
+        const treatment = await TreatmentService.setMedicationSchedule(req.params.treatmentId, req.params.medicationId, req.body.schedule);
+        if (treatment) {
+            res.status(200).json(treatment);
+        } else {
+            res.status(404).json({ message: 'Medication not found in treatment' });
+        }
+    } catch (error) {
+        res.status(500).json({ message: 'Error setting medication schedule' });
+    }
+};
+
+export const setStrictnessLevel = async (req: Request, res: Response) => {
+    try {
+        const treatment = await TreatmentService.setStrictnessLevel(req.params.id, req.body.strictnessLevel);
+        if (treatment) {
+            res.status(200).json(treatment);
+        } else {
+            res.status(404).json({ message: 'Treatment not found' });
+        }
+    } catch (error) {
+        res.status(500).json({ message: 'Error setting strictness level' });
+    }
+};
