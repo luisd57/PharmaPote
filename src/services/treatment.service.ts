@@ -10,6 +10,11 @@ export const createTreatment = async (treatmentData: ITreatment): Promise<ITreat
             if (!medicamentExists) {
                 throw new Error(`Medicament with ID ${medication.medicamentId} does not exist`);
             }
+
+            // Check if the schedule has at least one value and is in the "00:00" format
+            if (medication.schedule.length === 0 || !medication.schedule.every(hour => /^([0-1]?[0-9]|2[0-3]):[0-5][0-9]$/.test(hour))) {
+                throw new Error('Invalid schedule format or schedule is empty.');
+            }
         }
 
         const treatment = new Treatment(treatmentData);
@@ -22,6 +27,7 @@ export const createTreatment = async (treatmentData: ITreatment): Promise<ITreat
         }
     }
 };
+
 
 export const modifyTreatment = async (treatmentId: string, treatmentData: Partial<ITreatment>): Promise<ITreatment | null> => {
     try {
