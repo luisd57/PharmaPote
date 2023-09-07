@@ -23,7 +23,11 @@ const MedicationInTreatmentSchema: Schema = new mongoose.Schema({
 });
 
 const TreatmentSchema: Schema = new mongoose.Schema({
-    userId: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
+    userId: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User',
+        required: [true, 'User ID is required.']
+    },
     medications: {
         type: [MedicationInTreatmentSchema],
         validate: [(v: IMedicationInTreatment[]) => v.length > 0, 'A treatment must have at least one medicament.']

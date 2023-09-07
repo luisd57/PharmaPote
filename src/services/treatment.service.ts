@@ -1,6 +1,8 @@
 import Treatment from '../schemas/Treatment.schema';
 import { ITreatment } from '../interfaces/Treatment.interface';
 import Medicament from '../schemas/Medicament.schema';
+import User from '../schemas/User.schema';
+
 
 export const createTreatment = async (treatmentData: ITreatment): Promise<ITreatment> => {
     try {
@@ -15,6 +17,15 @@ export const createTreatment = async (treatmentData: ITreatment): Promise<ITreat
             if (medication.schedule.length === 0 || !medication.schedule.every(hour => /^([0-1]?[0-9]|2[0-3]):[0-5][0-9]$/.test(hour))) {
                 throw new Error('Invalid schedule format or schedule is empty.');
             }
+        }
+
+        if (!treatmentData.userId) {
+            throw new Error('User ID is required.');
+        }
+
+        const userExists = await User.findById(treatmentData.userId);
+        if (!userExists) {
+            throw new Error(`User with ID ${treatmentData.userId} does not exist`);
         }
 
         const treatment = new Treatment(treatmentData);
