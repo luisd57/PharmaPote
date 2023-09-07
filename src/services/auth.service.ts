@@ -2,7 +2,7 @@
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 import randomstring from 'randomstring';
-import User from '../models/User.model';
+import User from '../schemas/User.schema';
 import { IUser } from '../interfaces/User.interface';
 
 const generateToken = (userId: string): string => {

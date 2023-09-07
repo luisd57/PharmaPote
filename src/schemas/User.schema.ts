@@ -6,7 +6,11 @@ const UserSchema: Schema = new mongoose.Schema({
     username: { type: String, required: true, unique: true },
     password: { type: String, required: true },
     refreshToken: { type: String },
-    previousRefreshToken: { type: String }
+    previousRefreshToken: { type: String },
+    treatments: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Treatment'
+    }]
 });
 
 UserSchema.pre('save', function (next) {
@@ -22,4 +26,4 @@ UserSchema.methods.comparePassword = function (this: IUser, password: string): b
     return bcrypt.compareSync(password, this.password);
 };
 
-export default UserSchema;
+export default mongoose.model<IUser>('User', UserSchema);
