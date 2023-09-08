@@ -29,7 +29,11 @@ export const createTreatment = async (treatmentData: ITreatment): Promise<ITreat
         }
 
         const treatment = new Treatment(treatmentData);
-        return await treatment.save();
+        const savedTreatment = await treatment.save();
+
+        await User.findByIdAndUpdate(treatmentData.userId, { $push: { treatments: savedTreatment._id } });
+
+        return savedTreatment;
     } catch (error) {
         if (error instanceof Error) {
             throw new Error('Error while creating treatment: ' + error.message);

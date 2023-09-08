@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import { sendMedicationNotifications, getNotifications, markAsSeen } from '../controllers/notification.controller';
+import { getNotifications, markAsSeen } from '../controllers/notification.controller';
 
 const router: Router = Router();
 
