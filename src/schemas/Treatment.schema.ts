@@ -19,7 +19,12 @@ const MedicationInTreatmentSchema: Schema = new mongoose.Schema({
             message: 'At least one schedule time is required for each medication.'
         }],
         required: [true, 'Schedule is required.']
-    }, taken: { type: Boolean, default: false }
+    },
+    taken: { type: Boolean, default: false },
+    notificationsSent: {
+        type: [String],
+        default: []
+    }
 });
 
 const TreatmentSchema: Schema = new mongoose.Schema({

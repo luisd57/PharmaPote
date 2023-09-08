@@ -4,4 +4,5 @@ export interface IMedicationInTreatment extends Document {
     medicamentId: string;
     schedule: string[];
     taken: boolean;
+    notificationsSent?: string[];
 }
