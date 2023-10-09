@@ -6,6 +6,7 @@ import authRoutes from './routes/auth.routes';
 import treatmentRoutes from './routes/treatment.routes';
 import notificationRoutes from './routes/notification.routes';
 import cron from 'node-cron';
+import cookieParser from 'cookie-parser';
 import * as NotificationService from './services/notification.service';
 
 
@@ -24,6 +25,8 @@ app.use(cors({
     credentials: true
 }));
 
+app.use(cookieParser());
+
 app.use(express.json());
 app.use('/api', authRoutes);
 app.use('/api', treatmentRoutes);
@@ -32,9 +35,9 @@ app.use('/api', notificationRoutes);
 cron.schedule('*/1 * * * *', async () => {
     try {
         await NotificationService.sendMedicationNotifications();
-        console.log("Notifications sent!");
+        console.log("Notification cron");
     } catch (error) {
-        console.error("Error sending notifications:");
+        console.error("Error during cron");
     }
 });
 

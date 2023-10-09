@@ -5,9 +5,14 @@ export const createTreatment = async (req: Request, res: Response) => {
     try {
         const treatment = await TreatmentService.createTreatment(req.body);
         res.status(201).json(treatment);
-    } catch (error) {
-        res.status(500).json({ message: 'Error creating treatment' });
+    } catch (error: unknown) {
+        if (error instanceof Error) {
+            res.status(500).json({ message: 'Error creating treatment', details: error.message });
+        } else {
+            res.status(500).json({ message: 'Error creating treatment', details: 'An unknown error occurred' });
+        }
     }
+
 };
 
 export const modifyTreatment = async (req: Request, res: Response) => {

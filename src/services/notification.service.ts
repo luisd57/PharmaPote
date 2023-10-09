@@ -17,7 +17,7 @@ export const sendMedicationNotifications = async (): Promise<number> => {
         for (const medication of treatment.medications) {
             if (medication.schedule.includes(currentHour) && (!medication.notificationsSent || !medication.notificationsSent.includes(currentHour))) {
                 const medicament: IMedicament | null = await Medicament.findById(medication.medicamentId);
-                const message = `It's time to take ${medicament?.substance} from treatment: ${treatment._id}`;
+                const message = `It's time to take ${medicament?.substance} from treatment: ${treatment.name}`;
                 const notification = new Notification({
                     userId: treatment.userId,
                     treatmentId: treatment._id,

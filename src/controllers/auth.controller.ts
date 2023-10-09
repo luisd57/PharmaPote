@@ -6,7 +6,14 @@ export const register = async (req: Request, res: Response): Promise<void> => {
     try {
         const { username, password } = req.body;
         const { token, refreshToken, user } = await AuthService.registerUser(username, password);
-        res.status(201).send({ token, refreshToken, user });
+
+        res.cookie('token', token, {
+            httpOnly: true,
+            // secure: true, prod with https
+            maxAge: 15 * 60 * 1000 // 15 min in millis
+        });
+
+        res.status(201).send({ refreshToken, user });
     } catch (error) {
         if (error instanceof Error) {
             res.status(400).send({ error: error.message });
@@ -20,6 +27,13 @@ export const login = async (req: Request, res: Response): Promise<void> => {
     try {
         const { username, password } = req.body;
         const { token, refreshToken, user } = await AuthService.loginUser(username, password);
+
+        res.cookie('token', token, {
+            httpOnly: true,
+            // secure: true, prod with https
+            maxAge: 15 * 60 * 1000 // 15 min in millis
+        });
+
         res.status(200).send({ token, refreshToken, user });
     } catch (error) {
         if (error instanceof Error) {
@@ -32,16 +46,13 @@ export const login = async (req: Request, res: Response): Promise<void> => {
 
 export const isAuthenticated = (req: Request, res: Response): void => {
     try {
-        const bearerHeader: string | undefined = req.headers['authorization'] as string;
+        const token = req.cookies ? req.cookies.token : undefined;
 
-        if (!bearerHeader) {
+        if (!token) {
             throw new Error("Not authorized");
         }
 
-        const bearer: string[] = bearerHeader.split(' ');
-        const bearerToken: string = bearer[1];
-
-        const isValid = AuthService.validateUserToken(bearerToken);
+        const isValid = AuthService.validateUserToken(token);
         if (isValid) {
             res.status(200).json(true);
         } else {
@@ -60,6 +71,9 @@ export const logout = async (req: Request, res: Response): Promise<void> => {
     try {
         const { refreshToken } = req.body;
         const message = await AuthService.userLogout(refreshToken);
+
+        res.clearCookie('token');
+
         res.status(200).send({ message });
     } catch (error) {
         if (error instanceof Error) {

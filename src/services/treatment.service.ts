@@ -14,9 +14,12 @@ export const createTreatment = async (treatmentData: ITreatment): Promise<ITreat
             }
 
             // Check if the schedule has at least one value and is in the "00:00" format
-            if (medication.schedule.length === 0 || !medication.schedule.every(hour => /^([0-1]?[0-9]|2[0-3]):[0-5][0-9]$/.test(hour))) {
+            const isValidTime = (hour: string) => /^([0-1]?[0-9]|2[0-3]):[0-5][0-9]$/.test(hour);
+
+            if (!medication.schedule.length || !medication.schedule.every(isValidTime)) {
                 throw new Error('Invalid schedule format or schedule is empty.');
             }
+            
         }
 
         if (!treatmentData.userId) {
@@ -27,6 +30,10 @@ export const createTreatment = async (treatmentData: ITreatment): Promise<ITreat
         if (!userExists) {
             throw new Error(`User with ID ${treatmentData.userId} does not exist`);
         }
+
+        if (!treatmentData.name || treatmentData.name.length < 4) {
+            throw new Error('Treatment name should be at least 4 characters long.');
+        }        
 
         const treatment = new Treatment(treatmentData);
         const savedTreatment = await treatment.save();

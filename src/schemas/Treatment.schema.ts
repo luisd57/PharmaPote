@@ -33,6 +33,11 @@ const TreatmentSchema: Schema = new mongoose.Schema({
         ref: 'User',
         required: [true, 'User ID is required.']
     },
+    name: {
+        type: String,
+        required: [true, 'Treatment name is required.'],
+        minlength: [4, 'Treatment name should be at least 4 characters long.']
+    },
     medications: {
         type: [MedicationInTreatmentSchema],
         validate: [(v: IMedicationInTreatment[]) => v.length > 0, 'A treatment must have at least one medicament.']
