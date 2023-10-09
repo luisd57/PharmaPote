@@ -110,3 +110,15 @@ export const setStrictnessLevel = async (treatmentId: string, level: 'low' | 'me
         }
     }
 };
+
+export const getTreatmentsByUserId = async (userId: string): Promise<ITreatment[]> => {
+    try {
+        return await Treatment.find({ userId });
+    } catch (error) {
+        if (error instanceof Error) {
+            throw new Error('Error while fetching treatments: ' + error.message);
+        } else {
+            throw new Error('An unknown error occurred while fetching treatments');
+        }
+    }
+};

@@ -79,3 +79,21 @@ export const setStrictnessLevel = async (req: Request, res: Response) => {
         res.status(500).json({ message: 'Error setting strictness level' });
     }
 };
+
+export const getTreatments = async (req: Request, res: Response) => {
+    try {
+        if (!req.user || !req.user._id) {
+            return res.status(401).json({ message: 'User not authenticated' });
+        }
+
+        const userId = req.user._id;
+        const treatments = await TreatmentService.getTreatmentsByUserId(userId);
+        res.status(200).json(treatments);
+    } catch (error: unknown) {
+        if (error instanceof Error) {
+            res.status(500).json({ message: 'Error fetching treatments', details: error.message });
+        } else {
+            res.status(500).json({ message: 'Error fetching treatments', details: 'An unknown error occurred' });
+        }
+    }
+};

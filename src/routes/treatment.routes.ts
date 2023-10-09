@@ -1,5 +1,6 @@
 import { Router } from 'express';
-import { createTreatment, modifyTreatment, deleteTreatment, deleteMedicationFromTreatment, setMedicationSchedule, setStrictnessLevel } from '../controllers/treatment.controller';
+import { createTreatment, modifyTreatment, deleteTreatment, deleteMedicationFromTreatment, setMedicationSchedule, setStrictnessLevel, getTreatments } from '../controllers/treatment.controller';
+import { authenticate } from '../middlewares/auth.middleware';
 
 const router: Router = Router();
 
@@ -9,5 +10,6 @@ router.delete('/treatments/:id', deleteTreatment);
 router.delete('/treatments/:treatmentId/medications/:medicationId', deleteMedicationFromTreatment);
 router.put('/treatments/:treatmentId/medications/:medicationId', setMedicationSchedule);
 router.put('/treatments/:id/strictness', setStrictnessLevel);
+router.get('/treatments', authenticate, getTreatments);
 
 export default router;
