@@ -27,7 +27,6 @@ export const registerUser = async (username: string, password: string): Promise<
     const refreshToken: string = generateRefreshToken();
 
     user.refreshToken = refreshToken;
-    user.previousRefreshToken = refreshToken;
 
     await user.save();
 
@@ -48,7 +47,6 @@ export const loginUser = async (username: string, password: string): Promise<{ t
 
     const refreshToken: string = generateRefreshToken();
     user.refreshToken = refreshToken;
-    user.previousRefreshToken = refreshToken;
 
     await user.save();
 
@@ -89,7 +87,6 @@ export const generateTokenFromRefresh = async (refreshToken: string): Promise<{ 
     }
 
     const newRefreshToken: string = generateRefreshToken();
-    user.previousRefreshToken = refreshToken;
     user.refreshToken = newRefreshToken;
 
     await user.save();

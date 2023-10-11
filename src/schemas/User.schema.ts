@@ -6,11 +6,11 @@ const UserSchema: Schema = new mongoose.Schema({
     username: { type: String, required: true, unique: true },
     password: { type: String, required: true },
     refreshToken: { type: String },
-    previousRefreshToken: { type: String },
     treatments: [{
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Treatment'
-    }]
+    }],
+    role: { type: String, default: 'user', enum: ['user', 'admin'] }
 });
 
 UserSchema.pre('save', function (next) {
