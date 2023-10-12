@@ -30,8 +30,7 @@ export class AuthService {
   }
 
   logout(): Observable<any> {
-    const storedRefreshToken = localStorage.getItem('refreshToken');
-    return this.http.post(`${this.apiURL}/logout`, { refreshToken: storedRefreshToken }, { headers: this.headers, withCredentials: true }).pipe(
+    return this.http.post(`${this.apiURL}/logout`, {}, { headers: this.headers, withCredentials: true }).pipe(
       catchError(err => throwError(() => new Error(err.error.error)))
     );
   }

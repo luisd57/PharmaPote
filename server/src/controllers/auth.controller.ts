@@ -13,6 +13,13 @@ export const register = async (req: Request, res: Response): Promise<void> => {
             maxAge: 15 * 60 * 1000 // 15 min in millis
         });
 
+        res.cookie('refreshToken', refreshToken, {
+            httpOnly: true,
+            // secure: true, // Uncomment for production with HTTPS
+            maxAge: 7 * 24 * 60 * 60 * 1000 // 7 days in milliseconds
+        });
+        
+
         res.status(201).send({ refreshToken, user });
     } catch (error) {
         if (error instanceof Error) {
@@ -33,6 +40,13 @@ export const login = async (req: Request, res: Response): Promise<void> => {
             // secure: true, // for prod with https
             maxAge: 15 * 60 * 1000 // 15 min in millis
         });
+
+        res.cookie('refreshToken', refreshToken, {
+            httpOnly: true,
+            // secure: true, // Uncomment for production with HTTPS
+            maxAge: 7 * 24 * 60 * 60 * 1000 // 7 days in milliseconds
+        });
+        
 
         res.status(200).send({ token, refreshToken, user });
     } catch (error) {
@@ -69,10 +83,11 @@ export const isAuthenticated = (req: Request, res: Response): void => {
 
 export const logout = async (req: Request, res: Response): Promise<void> => {
     try {
-        const { refreshToken } = req.body;
+        const refreshToken = req.cookies ? req.cookies.refreshToken : undefined;
         const message = await AuthService.userLogout(refreshToken);
 
         res.clearCookie('token');
+        res.clearCookie('refreshToken');
 
         res.status(200).send({ message });
     } catch (error) {
