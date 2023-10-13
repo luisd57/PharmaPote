@@ -1,17 +1,16 @@
+<!-- <app-navbar></app-navbar>
 <section>
   <h2>Register</h2>
   <form (ngSubmit)="register(user)">
     <div>
       <label for="username">Username:</label>
-      <input type="text" id="username" name="username" 
-             [ngModel]="user.username" 
-             (ngModelChange)="user && (user.username = $event)" required>
+      <input type="text" id="username" name="username" [ngModel]="user.username"
+        (ngModelChange)="user && (user.username = $event)" required>
     </div>
     <div>
       <label for="password">Password:</label>
-      <input type="password" id="password" name="password" 
-             [ngModel]="user.password" 
-             (ngModelChange)="user && (user.password = $event)" required>
+      <input type="password" id="password" name="password" [ngModel]="user.password"
+        (ngModelChange)="user && (user.password = $event)" required>
     </div>
     <div>
       <button type="submit">Register</button>
@@ -24,15 +23,13 @@
   <form (ngSubmit)="login(user)">
     <div>
       <label for="username">Username:</label>
-      <input type="text" id="username" name="username" 
-             [ngModel]="user.username" 
-             (ngModelChange)="user && (user.username = $event)" required>
+      <input type="text" id="username" name="username" [ngModel]="user.username"
+        (ngModelChange)="user && (user.username = $event)" required>
     </div>
     <div>
       <label for="password">Password:</label>
-      <input type="password" id="password" name="password" 
-             [ngModel]="user.password" 
-             (ngModelChange)="user && (user.password = $event)" required>
+      <input type="password" id="password" name="password" [ngModel]="user.password"
+        (ngModelChange)="user && (user.password = $event)" required>
     </div>
     <div>
       <button type="submit">Login</button>
@@ -41,4 +38,5 @@
 </section>
 <div>
   <button (click)="logout()">Logout</button>
-</div>
+</div> -->
+<router-outlet></router-outlet>

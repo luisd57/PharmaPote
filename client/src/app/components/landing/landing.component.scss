@@ -1,0 +1,58 @@
+:host {
+    display: block;
+    background: url('/assets/background1.png') no-repeat center center fixed;
+    background-size: cover;
+    height: 100vh;
+    overflow: hidden;
+}
+
+.title {
+    font-size: 2rem;
+    font-weight: bold;
+    text-align: center;
+    padding: 10px;
+    // border-bottom: #0ab8b4 2px solid;
+    border-bottom: #e9bead 2px solid;
+}
+
+
+.landing-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    text-align: center;
+    padding: 0 20px;
+
+    .landing-text {
+        max-width: 600px;
+        font-size: 1.5rem;
+        margin-bottom: 20px;
+    }
+
+    .get-started-btn {
+        // background-color: #0ab8b4;
+        background-color: #e9bead;
+        padding: 10px 20px;
+        border: none;
+        // border-radius: 5px;
+        font-size: 1.2rem;
+        cursor: pointer;
+
+        &:hover {
+            background-color: #e9bead;
+        }
+    }
+}
+
+@media (max-width: 768px) {
+    .landing-text {
+        font-size: 1.2rem;
+    }
+
+    .get-started-btn {
+        font-size: 1rem;
+        padding: 8px 16px;
+    }
+}
