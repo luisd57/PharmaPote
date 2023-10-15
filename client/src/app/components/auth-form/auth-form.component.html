@@ -1,1 +1,26 @@
-<p>auth-form works!</p>
+<form [formGroup]="authForm" (ngSubmit)="onSubmit()">
+    <div class="form-group">
+        <label for="username">
+            Username
+        </label>
+        <input type="username" formControlName="username" id="username"
+            [ngClass]="{ 'is-invalid': authForm.get('username')?.invalid && authForm.get('username')?.touched }"
+            required>
+    </div>
+    <div class="form-group">
+        <label for="password">
+            Password
+        </label>
+        <input type="password" formControlName="password" id="password"
+            [ngClass]="{ 'is-invalid': authForm.get('password')?.invalid && authForm.get('password')?.touched }"
+            required>
+    </div>
+    <div class="form-group text-center">
+        <button type="submit">
+            {{isLoginMode ? 'Submit' : 'Confirm'}}
+        </button>
+        <div *ngIf="errorMessage" class="errorMessage">
+            {{ errorMessage }}
+        </div>
+    </div>
+</form>

@@ -1,1 +1,20 @@
-<p>auth works!</p>
+<div class="title"> App </div>
+
+<div class="container">
+    <div class="tab-container">
+        <ul>
+            <li (click)="activeTab='login'">
+                <a [ngClass]="{'active-tab': activeTab === 'login'}" class="tab-link">Login</a>
+            </li>
+            <li (click)="activeTab='register'">
+                <a [ngClass]="{'active-tab': activeTab === 'register'}" class="tab-link">Register</a>
+            </li>
+        </ul>
+        <app-auth-form [isLoginMode]="true" [errorMessage]="errorMessage" (onFormSubmit)="onSubmitLogin($event)"
+            *ngIf="activeTab === 'login'">
+        </app-auth-form>
+        <app-auth-form [isLoginMode]="false" [errorMessage]="errorMessage" (onFormSubmit)="onSubmitRegister($event)"
+            *ngIf="activeTab === 'register'">
+        </app-auth-form>
+    </div>
+</div>
