@@ -13,8 +13,8 @@
         left: 0;
         background: url('/assets/background.png') no-repeat center center fixed;
         background-size: cover;
-        opacity: 0.5; // Adjust this value to control transparency (0 for fully transparent, 1 for fully opaque)
-        z-index: -1; // This ensures the background is behind the content
+        opacity: 0.5; 
+        z-index: -1; 
     }
 }
 
@@ -23,7 +23,7 @@
     font-weight: bold;
     text-align: center;
     padding: 10px;
-    background-color: rgba(255, 255, 255, 0.2); // A subtle white background with 20% opacity
+    background-color: rgba(255, 255, 255, 0.2);
     // border-bottom: #0ab8b4 2px solid;
     // border-bottom: #e9bead 2px solid;
 }
@@ -58,7 +58,7 @@
         margin-top: 50px;
 
         &:hover {
-            background-color: #e9bead;
+            background-color: #27807e;
         }
     }
 }

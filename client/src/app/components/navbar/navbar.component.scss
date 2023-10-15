@@ -3,7 +3,6 @@ nav {
     justify-content: space-between;
     padding: 1rem 2rem;
     background-color: #0ab8b4;
-    color: #fff;
   
     .container {
       display: flex;
@@ -25,7 +24,6 @@ nav {
       }
   
       a {
-        color: #fff;
         padding: 0.5rem 1rem;
         border-radius: 8px;
         transition: background-color 0.3s;
