@@ -1,4 +1,4 @@
-$parent-border-color: #282828;
+$form-border-color: #282828;
 
 .title {
     font-size: 2rem;
@@ -26,7 +26,7 @@ $parent-border-color: #282828;
             text-align: center;
             font-size: 1.875rem;
             font-weight: bold;
-            color: $parent-border-color;
+            color: $form-border-color;
 
             fa-icon {
                 font-size: 1.125rem;
@@ -38,11 +38,11 @@ $parent-border-color: #282828;
     .tab-container {
         padding: 1.5rem;
         margin-bottom: 2.5rem;
-        border: 1px solid $parent-border-color;
+        border: 1px solid $form-border-color;
 
         ul {
             display: flex;
-            border-bottom: 1px solid $parent-border-color;
+            border-bottom: 1px solid $form-border-color;
             margin-bottom: 1rem;
 
             li {
@@ -56,8 +56,8 @@ $parent-border-color: #282828;
                     cursor: pointer;
 
                     &.active-tab {
-                        border-bottom: 2px solid $parent-border-color;
-                        color: $parent-border-color;
+                        border-bottom: 2px solid $form-border-color;
+                        color: $form-border-color;
                     }
                 }
             }
