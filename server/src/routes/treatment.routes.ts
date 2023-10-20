@@ -4,7 +4,7 @@ import { authenticate } from '../middlewares/auth.middleware';
 
 const router: Router = Router();
 
-router.post('/treatments', createTreatment);
+router.post('/treatments/create', createTreatment);
 router.put('/treatments/:id', modifyTreatment);
 router.delete('/treatments/:id', deleteTreatment);
 router.delete('/treatments/:treatmentId/medications/:medicationId', deleteMedicationFromTreatment);
