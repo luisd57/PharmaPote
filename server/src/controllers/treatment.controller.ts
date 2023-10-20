@@ -23,8 +23,12 @@ export const modifyTreatment = async (req: Request, res: Response) => {
         } else {
             res.status(404).json({ message: 'Treatment not found' });
         }
-    } catch (error) {
-        res.status(500).json({ message: 'Error modifying treatment' });
+    } catch (error: unknown) {
+        if (error instanceof Error) {
+            res.status(500).json({ message: 'Error modifying treatment', details: error.message });
+        } else {
+            res.status(500).json({ message: 'Error modifying treatment', details: 'An unknown error occurred' });
+        }
     }
 };
 
@@ -36,8 +40,12 @@ export const deleteTreatment = async (req: Request, res: Response) => {
         } else {
             res.status(404).json({ message: 'Treatment not found' });
         }
-    } catch (error) {
-        res.status(500).json({ message: 'Error deleting treatment' });
+    } catch (error: unknown) {
+        if (error instanceof Error) {
+            res.status(500).json({ message: 'Error deleting treatment', details: error.message });
+        } else {
+            res.status(500).json({ message: 'Error deleting treatment', details: 'An unknown error occurred' });
+        }
     }
 };
 
@@ -49,8 +57,12 @@ export const deleteMedicationFromTreatment = async (req: Request, res: Response)
         } else {
             res.status(404).json({ message: 'Medication not found in treatment' });
         }
-    } catch (error) {
-        res.status(500).json({ message: 'Error deleting medication from treatment' });
+    } catch (error: unknown) {
+        if (error instanceof Error) {
+            res.status(500).json({ message: 'Error deleting medication from treatment', details: error.message });
+        } else {
+            res.status(500).json({ message: 'Error deleting medication from treatment', details: 'An unknown error occurred' });
+        }
     }
 };
 
@@ -62,8 +74,12 @@ export const setMedicationSchedule = async (req: Request, res: Response) => {
         } else {
             res.status(404).json({ message: 'Medication not found in treatment' });
         }
-    } catch (error) {
-        res.status(500).json({ message: 'Error setting medication schedule' });
+    } catch (error: unknown) {
+        if (error instanceof Error) {
+            res.status(500).json({ message: 'Error setting medication schedule', details: error.message });
+        } else {
+            res.status(500).json({ message: 'Error setting medication schedule', details: 'An unknown error occurred' });
+        }
     }
 };
 
@@ -75,8 +91,12 @@ export const setStrictnessLevel = async (req: Request, res: Response) => {
         } else {
             res.status(404).json({ message: 'Treatment not found' });
         }
-    } catch (error) {
-        res.status(500).json({ message: 'Error setting strictness level' });
+    } catch (error: unknown) {
+        if (error instanceof Error) {
+            res.status(500).json({ message: 'Error setting strictness level', details: error.message });
+        } else {
+            res.status(500).json({ message: 'Error setting strictness level', details: 'An unknown error occurred' });
+        }
     }
 };
 
