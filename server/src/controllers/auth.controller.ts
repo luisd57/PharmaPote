@@ -18,14 +18,13 @@ export const register = async (req: Request, res: Response): Promise<void> => {
             // secure: true, // Uncomment for production with HTTPS
             maxAge: 7 * 24 * 60 * 60 * 1000 // 7 days in milliseconds
         });
-        
 
         res.status(201).send({ refreshToken, user });
-    } catch (error) {
+    } catch (error: unknown) {
         if (error instanceof Error) {
-            res.status(400).send({ error: error.message });
+            res.status(400).json({ message: 'Error registering user', details: error.message });
         } else {
-            res.status(400).send({ error: 'An unknown error occurred.' });
+            res.status(500).json({ message: 'Error registering user', details: 'An unknown error occurred' });
         }
     }
 };
@@ -46,14 +45,14 @@ export const login = async (req: Request, res: Response): Promise<void> => {
             // secure: true, // Uncomment for production with HTTPS
             maxAge: 7 * 24 * 60 * 60 * 1000 // 7 days in milliseconds
         });
-        
+
 
         res.status(200).send({ token, refreshToken, user });
-    } catch (error) {
+    } catch (error: unknown) {
         if (error instanceof Error) {
-            res.status(400).send({ error: error.message });
+            res.status(400).json({ message: 'Error logging in user', details: error.message });
         } else {
-            res.status(400).send({ error: 'An unknown error occurred.' });
+            res.status(500).json({ message: 'Error logging in user', details: 'An unknown error occurred' });
         }
     }
 };
@@ -74,9 +73,9 @@ export const isAuthenticated = (req: Request, res: Response): void => {
         }
     } catch (error) {
         if (error instanceof Error) {
-            res.status(400).send({ error: error.message });
+            res.status(400).json({ message: 'Error validating user', details: error.message });
         } else {
-            res.status(400).send({ error: 'An unknown error occurred.' });
+            res.status(500).json({ message: 'Error validating user', details: 'An unknown error occurred' });
         }
     }
 };
@@ -90,11 +89,11 @@ export const logout = async (req: Request, res: Response): Promise<void> => {
         res.clearCookie('refreshToken');
 
         res.status(200).send({ message });
-    } catch (error) {
+    } catch (error: unknown) {
         if (error instanceof Error) {
-            res.status(400).send({ error: error.message });
+            res.status(400).json({ message: 'Error logging out user', details: error.message });
         } else {
-            res.status(400).send({ error: 'An unknown error occurred.' });
+            res.status(500).json({ message: 'Error logging out user', details: 'An unknown error occurred' });
         }
     }
 };
@@ -106,9 +105,9 @@ export const token = async (req: Request, res: Response): Promise<void> => {
         res.status(200).send({ token, refreshToken: newRefreshToken, user });
     } catch (error) {
         if (error instanceof Error) {
-            res.status(400).send({ error: error.message });
+            res.status(400).json({ message: 'Error generating token', details: error.message });
         } else {
-            res.status(400).send({ error: 'An unknown error occurred.' });
+            res.status(500).json({ message: 'Error generating token', details: 'An unknown error occurred' });
         }
     }
 };

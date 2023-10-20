@@ -7,7 +7,7 @@ export const createTreatment = async (req: Request, res: Response) => {
         res.status(201).json(treatment);
     } catch (error: unknown) {
         if (error instanceof Error) {
-            res.status(500).json({ message: 'Error creating treatment', details: error.message });
+            res.status(400).json({ message: 'Error creating treatment', details: error.message });
         } else {
             res.status(500).json({ message: 'Error creating treatment', details: 'An unknown error occurred' });
         }
@@ -25,7 +25,7 @@ export const modifyTreatment = async (req: Request, res: Response) => {
         }
     } catch (error: unknown) {
         if (error instanceof Error) {
-            res.status(500).json({ message: 'Error modifying treatment', details: error.message });
+            res.status(400).json({ message: 'Error modifying treatment', details: error.message });
         } else {
             res.status(500).json({ message: 'Error modifying treatment', details: 'An unknown error occurred' });
         }
@@ -42,7 +42,7 @@ export const deleteTreatment = async (req: Request, res: Response) => {
         }
     } catch (error: unknown) {
         if (error instanceof Error) {
-            res.status(500).json({ message: 'Error deleting treatment', details: error.message });
+            res.status(400).json({ message: 'Error deleting treatment', details: error.message });
         } else {
             res.status(500).json({ message: 'Error deleting treatment', details: 'An unknown error occurred' });
         }
@@ -59,7 +59,7 @@ export const deleteMedicationFromTreatment = async (req: Request, res: Response)
         }
     } catch (error: unknown) {
         if (error instanceof Error) {
-            res.status(500).json({ message: 'Error deleting medication from treatment', details: error.message });
+            res.status(400).json({ message: 'Error deleting medication from treatment', details: error.message });
         } else {
             res.status(500).json({ message: 'Error deleting medication from treatment', details: 'An unknown error occurred' });
         }
@@ -76,7 +76,7 @@ export const setMedicationSchedule = async (req: Request, res: Response) => {
         }
     } catch (error: unknown) {
         if (error instanceof Error) {
-            res.status(500).json({ message: 'Error setting medication schedule', details: error.message });
+            res.status(400).json({ message: 'Error setting medication schedule', details: error.message });
         } else {
             res.status(500).json({ message: 'Error setting medication schedule', details: 'An unknown error occurred' });
         }
@@ -93,7 +93,7 @@ export const setStrictnessLevel = async (req: Request, res: Response) => {
         }
     } catch (error: unknown) {
         if (error instanceof Error) {
-            res.status(500).json({ message: 'Error setting strictness level', details: error.message });
+            res.status(400).json({ message: 'Error setting strictness level', details: error.message });
         } else {
             res.status(500).json({ message: 'Error setting strictness level', details: 'An unknown error occurred' });
         }
@@ -111,7 +111,7 @@ export const getTreatments = async (req: Request, res: Response) => {
         res.status(200).json(treatments);
     } catch (error: unknown) {
         if (error instanceof Error) {
-            res.status(500).json({ message: 'Error fetching treatments', details: error.message });
+            res.status(400).json({ message: 'Error fetching treatments', details: error.message });
         } else {
             res.status(500).json({ message: 'Error fetching treatments', details: 'An unknown error occurred' });
         }
