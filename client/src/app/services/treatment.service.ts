@@ -1,6 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, catchError, throwError, tap } from 'rxjs';
+import { Observable, catchError, throwError } from 'rxjs';
 import { ITreatment } from '../interfaces/Treatment.interface';
 import { ITreamentResponse } from '../interfaces/TreatmentResponse.interface';
 
@@ -35,9 +35,15 @@ export class TreatmentService {
     );
   }
 
-  getTreatments(): Observable<ITreatment[]> {
+  getUserTreatments(): Observable<ITreatment[]> {
     return this.http.get<ITreatment[]>(`${this.apiURL}`, { headers: this.headers }).pipe(
-      catchError(err => throwError(() => new Error(err.error.error)))
+      catchError(err => throwError(() => new Error(err.error.error))),
+    );
+  }
+
+  getAllTreatments(): Observable<ITreatment[]> {
+    return this.http.get<ITreatment[]>(`${this.apiURL}/all`, { headers: this.headers }).pipe(
+      catchError(err => throwError(() => new Error(err.error.error))),
     );
   }
 
