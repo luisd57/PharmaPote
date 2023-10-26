@@ -18,7 +18,10 @@ export const authenticate = async (req: Request, res: Response, next: NextFuncti
             return res.status(401).json({ message: "Not authorized" });
         }
 
-        req.user = user;
+        req.user = {
+            _id: user._id.toString(),
+            role: user.role
+        };
         next();
 
     } catch (error) {

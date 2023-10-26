@@ -100,7 +100,7 @@ export const setStrictnessLevel = async (req: Request, res: Response) => {
     }
 };
 
-export const getTreatments = async (req: Request, res: Response) => {
+export const getTreatmentsByUserId = async (req: Request, res: Response) => {
     try {
         if (!req.user || !req.user._id) {
             return res.status(401).json({ message: 'User not authenticated' });
@@ -117,3 +117,20 @@ export const getTreatments = async (req: Request, res: Response) => {
         }
     }
 };
+
+export const getAllTreatments = async (req: Request, res: Response) => {
+    try {
+        if (!req.user || !req.user._id || req.user.role !== 'admin') {
+            return res.status(401).json({ message: 'User not authenticated' });
+        }
+
+        const treatments = await TreatmentService.getAllTreatments();
+        res.status(200).json(treatments);
+    } catch (error: unknown) {
+        if (error instanceof Error) {
+            res.status(400).json({ message: 'Error fetching treatments', details: error.message });
+        } else {
+            res.status(500).json({ message: 'Error fetching treatments', details: 'An unknown error occurred' });
+        }
+    }
+}

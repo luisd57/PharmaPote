@@ -41,7 +41,6 @@ export class TreatmentService {
     );
   }
 
-  //TODO: add generic types for responses on the methods below
   deleteMedicationFromTreatment(treatmentId: number, medicationId: number): Observable<ITreamentResponse> {
     return this.http.delete<ITreamentResponse>(`${this.apiURL}/${treatmentId}/medications/${medicationId}`, { headers: this.headers }).pipe(
       catchError(err => throwError(() => new Error(err.error.error)))

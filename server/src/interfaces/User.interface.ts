@@ -6,6 +6,6 @@ export interface IUser extends Document {
     password: string;
     refreshToken?: string;
     treatments: ITreatment['_id'][];
-    role: string;
+    role: 'user' | 'admin';
     comparePassword(password: string): boolean;
 }

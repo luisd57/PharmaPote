@@ -2,6 +2,7 @@ import Treatment from '../schemas/Treatment.schema';
 import { ITreatment } from '../interfaces/Treatment.interface';
 import Medicament from '../schemas/Medicament.schema';
 import User from '../schemas/User.schema';
+import { ObjectId } from 'mongoose';
 
 
 export const createTreatment = async (treatmentData: ITreatment): Promise<ITreatment> => {
@@ -111,9 +112,21 @@ export const setStrictnessLevel = async (treatmentId: string, level: 'low' | 'me
     }
 };
 
-export const getTreatmentsByUserId = async (userId: string): Promise<ITreatment[]> => {
+export const getTreatmentsByUserId = async (userId: string | ObjectId): Promise<ITreatment[]> => {
     try {
         return await Treatment.find({ userId });
+    } catch (error) {
+        if (error instanceof Error) {
+            throw new Error('Error while fetching treatments: ' + error.message);
+        } else {
+            throw new Error('An unknown error occurred while fetching treatments');
+        }
+    }
+};
+
+export const getAllTreatments = async (): Promise<ITreatment[]> => {
+    try {
+        return await Treatment.find();
     } catch (error) {
         if (error instanceof Error) {
             throw new Error('Error while fetching treatments: ' + error.message);

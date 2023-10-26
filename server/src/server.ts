@@ -9,7 +9,6 @@ import cron from 'node-cron';
 import cookieParser from 'cookie-parser';
 import * as NotificationService from './services/notification.service';
 
-
 dotenv.config();
 
 const app: Application = express();
