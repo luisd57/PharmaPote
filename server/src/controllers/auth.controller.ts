@@ -15,8 +15,8 @@ export const register = async (req: Request, res: Response): Promise<void> => {
 
         res.cookie('refreshToken', refreshToken, {
             httpOnly: true,
-            // secure: true, // Uncomment for production with HTTPS
-            maxAge: 7 * 24 * 60 * 60 * 1000 // 7 days in milliseconds
+            // secure: true, for prod with https
+            maxAge: 7 * 24 * 60 * 60 * 1000 // 7 days in millis
         });
 
         res.status(201).send({ refreshToken, user });
@@ -42,7 +42,7 @@ export const login = async (req: Request, res: Response): Promise<void> => {
 
         res.cookie('refreshToken', refreshToken, {
             httpOnly: true,
-            // secure: true, // Uncomment for production with HTTPS
+            // secure: true, for prod with https
             maxAge: 7 * 24 * 60 * 60 * 1000 // 7 days in milliseconds
         });
 
