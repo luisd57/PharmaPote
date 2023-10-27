@@ -19,7 +19,7 @@ export class AuthComponent {
       next: (response) => {
         console.log('User logged in successfully');
         alert(`Welcome ${response.user.username}`);
-        //todo this.router.navigate(['/']);
+        this.router.navigate(['treatments/create']);
       },
       error: (error) => {
         console.error('Login failed: ', error);

@@ -10,6 +10,8 @@ import { NavbarComponent } from './components/navbar/navbar.component';
 import { LandingComponent } from './components/landing/landing.component';
 import { AuthComponent } from './components/auth/auth.component';
 import { AuthFormComponent } from './components/auth-form/auth-form.component';
+import { CreateTreatmentComponent } from './components/create-treatment/create-treatment.component';
+import { ListTreatmentComponent } from './components/list-treatment/list-treatment.component';
 
 @NgModule({
   declarations: [
@@ -17,7 +19,9 @@ import { AuthFormComponent } from './components/auth-form/auth-form.component';
     NavbarComponent,
     LandingComponent,
     AuthComponent,
-    AuthFormComponent
+    AuthFormComponent,
+    CreateTreatmentComponent,
+    ListTreatmentComponent
   ],
   imports: [
     BrowserModule,

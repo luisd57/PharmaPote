@@ -1,4 +1,4 @@
-import express, { Application } from 'express';
+import express from 'express';
 import mongoose from 'mongoose';
 import cors from 'cors';
 import dotenv from 'dotenv';
@@ -12,7 +12,7 @@ import * as NotificationService from './services/notification.service';
 
 dotenv.config();
 
-const app: Application = express();
+const app = express();
 const PORT: number = 3000;
 
 mongoose.connect(process.env.MONGO_URI!)
