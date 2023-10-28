@@ -1,9 +1,11 @@
 import { IMedicament } from "../interfaces/Medicament.interface";
 import Medicament from "../schemas/Medicament.schema"
 
-export const getMedicaments = async (): Promise<IMedicament[]> => {
+export const getMedicaments = async (searchTerm: string): Promise<IMedicament[]> => {
     try {
-        return await Medicament.find();
+        //searchTerm = searchTerm.trim().replace(/\n/g, '');
+        const regex = new RegExp(searchTerm, 'i');
+        return await Medicament.find({ substance: regex });
     } catch (error) {
         if (error instanceof Error) {
             throw new Error('Error while getting medicaments: ' + error.message);
@@ -11,4 +13,4 @@ export const getMedicaments = async (): Promise<IMedicament[]> => {
             throw new Error('An unknown error occurred while getting medicaments');
         }
     }
-}
+};
