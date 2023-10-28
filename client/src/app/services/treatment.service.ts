@@ -9,7 +9,7 @@ import { ITreamentResponse } from '../interfaces/TreatmentResponse.interface';
 })
 export class TreatmentService {
 
-  private apiURL = 'http://localhost:3000/api/treatment';
+  private apiURL = 'http://localhost:3000/api/treatments';
 
   private headers = new HttpHeaders({
     'Content-Type': 'application/json',

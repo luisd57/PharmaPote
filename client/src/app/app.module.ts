@@ -12,6 +12,7 @@ import { AuthComponent } from './components/auth/auth.component';
 import { AuthFormComponent } from './components/auth-form/auth-form.component';
 import { CreateTreatmentComponent } from './components/create-treatment/create-treatment.component';
 import { ListTreatmentComponent } from './components/list-treatment/list-treatment.component';
+import { MedicamentInputComponent } from './components/medicament-input/medicament-input.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { ListTreatmentComponent } from './components/list-treatment/list-treatme
     AuthComponent,
     AuthFormComponent,
     CreateTreatmentComponent,
-    ListTreatmentComponent
+    ListTreatmentComponent,
+    MedicamentInputComponent
   ],
   imports: [
     BrowserModule,
