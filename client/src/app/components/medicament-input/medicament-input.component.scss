@@ -1,0 +1,41 @@
+.medicament-input {
+    position: relative;
+
+    input {
+        box-sizing: border-box;
+        width: 100%;
+        padding: 8px 10px;
+        border: 2px solid #D9E5E7;
+        border-radius: 5px;
+        font-size: 1rem;
+
+        &:focus {
+            outline: none;
+            border-color: #B0C9CB;
+        }
+    }
+}
+
+.medicament-input ul {
+    box-sizing: border-box;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: calc(100% - 4px);
+    margin-top: 2px;
+    background-color: #EAF1F3;
+    border: 2px solid #D9E5E7;
+    border-radius: 5px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    z-index: 100;
+    list-style: none;
+
+    li {
+        padding: 8px 10px;
+        cursor: pointer;
+
+        &:hover {
+            background-color: #D9E5E7;
+        }
+    }
+}

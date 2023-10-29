@@ -1,37 +1,39 @@
-<form [formGroup]="treatmentForm" (ngSubmit)="onSubmit()">
+<form [formGroup]="treatmentForm" (ngSubmit)="onSubmit()" class="treatment-form">
 
-    <div>
+    <div class="form-group">
         <label>Name:</label>
         <input type="text" formControlName="name">
     </div>
 
-    <div formArrayName="medications" *ngFor="let medication of medications.controls; let i = index">
+    <div formArrayName="medications" *ngFor="let medication of medications.controls; let i = index"
+        class="medication-group">
         <div [formGroupName]="i">
 
             <app-medicament-input (medicamentSelected)="onMedicamentSelected($event, i)"></app-medicament-input>
 
-            <p>Selected Medicament: {{ medication.get('substance')?.value }}</p>
+            <p class="selected-medicament">Selected Medicament: {{ medication.get('substance')?.value }}</p>
 
-            <div>
+            <div class="form-group">
                 <label>Add Hour:</label>
                 <input type="time" #timeInput (change)="addScheduleHour(i, timeInput.value)">
             </div>
 
-            <div formArrayName="schedule" *ngFor="let hour of getSchedule(i).controls; let j = index">
+            <div formArrayName="schedule" *ngFor="let hour of getSchedule(i).controls; let j = index"
+                class="schedule-group">
                 <p>
                     {{ hour.value }}
-                    <button (click)="removeScheduleHour(i, j)">Remove</button>
+                    <button class="remove-btn" (click)="removeScheduleHour(i, j)">Remove</button>
                 </p>
             </div>
 
-            <button (click)="removeMedication(i)">Remove Medication</button>
+            <button class="remove-btn" (click)="removeMedication(i)">Remove Medication</button>
 
         </div>
     </div>
 
-    <button (click)="addMedication()">Add Medication</button>
+    <button class="add-btn" (click)="addMedication()">Add Medication</button>
 
-    <div>
+    <div class="form-group">
         <label>Strictness Level:</label>
         <select formControlName="strictnessLevel">
             <option value="low">Low</option>
@@ -40,7 +42,7 @@
         </select>
     </div>
 
-    <div>
+    <div class="form-group text-center">
         <button type="submit">Create Treatment</button>
     </div>
 

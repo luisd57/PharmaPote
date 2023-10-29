@@ -1,6 +1,8 @@
-<input type="text" [formControl]="inputCtrl" placeholder="Type medicament name...">
-<ul *ngIf="medicaments.length">
-    <li *ngFor="let medicament of medicaments" (click)="selectMedicament(medicament)">
-        {{ medicament.substance }}
-    </li>
-</ul>
+<div class="medicament-input">
+    <input type="text" [formControl]="inputCtrl" placeholder="Type medicament name...">
+    <ul *ngIf="medicaments.length">
+        <li *ngFor="let medicament of medicaments" (click)="selectMedicament(medicament)">
+            {{ medicament.substance }} - {{ medicament.dosage }}
+        </li>
+    </ul>
+</div>

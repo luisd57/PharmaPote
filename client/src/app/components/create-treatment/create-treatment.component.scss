@@ -1,0 +1,100 @@
+$treatment-border-color: #282828;
+
+.treatment-form {
+    padding: 1.5rem;
+    border: 1px solid $treatment-border-color;
+    margin: 0 auto;
+
+    .medication-group {
+        margin-top: 2rem;
+    }
+
+    .selected-medicament {
+        margin: 1rem 0;
+    }
+
+    .schedule-group {
+        display: flex;
+        align-items: center;
+
+        p {
+            margin-right: 1rem;
+        }
+
+        .remove-btn {
+            background-color: red;
+            color: white;
+        }
+    }
+
+    .add-btn {
+        background-color: #64a3a1;
+        color: white;
+        margin-top: 1rem;
+    }
+}
+
+.form-group {
+    margin-bottom: 1.5rem;
+
+    label {
+        display: block;
+        font-weight: medium;
+        margin-bottom: 0.5rem;
+    }
+
+    input {
+        width: 100%;
+        border: 1px solid $treatment-border-color;
+        background-color: #95c6c4;
+        padding: 0.5rem;
+        box-sizing: border-box;
+    }
+}
+
+button {
+    display: inline-block;
+    background-color: #95c6c4;
+    font-weight: 600;
+    padding: 0.5rem 1rem;
+    border: 2px solid;
+    margin-top: 1rem;
+    cursor: pointer;
+
+    &:hover {
+        background-color: #64a3a1;
+    }
+
+    &.remove-btn {
+        background-color: red;
+        color: white;
+        margin-top: 0.5rem;
+    }
+
+    &.add-btn {
+        background-color: green;
+        color: white;
+        margin-top: 0.5rem;
+    }
+}
+
+.text-center {
+    text-align: center;
+}
+
+@media (max-width: 640px) {
+
+    form {
+        padding: 1rem;
+    }
+
+    .form-group {
+        input {
+            font-size: 0.875rem;
+        }
+    }
+
+    button {
+        width: 100%;
+    }
+}
