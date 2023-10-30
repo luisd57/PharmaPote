@@ -5,11 +5,11 @@
         <input type="text" formControlName="name">
     </div>
 
+    <app-medicament-input (medicamentSelected)="onMedicamentSelected($event)"></app-medicament-input>
+
     <div formArrayName="medications" *ngFor="let medication of medications.controls; let i = index"
         class="medication-group">
         <div [formGroupName]="i">
-
-            <app-medicament-input (medicamentSelected)="onMedicamentSelected($event, i)"></app-medicament-input>
 
             <p class="selected-medicament">Selected Medicament: {{ medication.get('substance')?.value }}</p>
 
@@ -31,7 +31,7 @@
         </div>
     </div>
 
-    <button class="add-btn" (click)="addMedication()">Add Medication</button>
+    <!-- <button class="add-btn" (click)="addMedication()">Add Medication</button> -->
 
     <div class="form-group">
         <label>Strictness Level:</label>

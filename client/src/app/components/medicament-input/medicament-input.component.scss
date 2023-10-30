@@ -1,17 +1,18 @@
+$treatment-border-color: #282828;
+
 .medicament-input {
     position: relative;
 
     input {
-        box-sizing: border-box;
         width: 100%;
-        padding: 8px 10px;
-        border: 2px solid #D9E5E7;
-        border-radius: 5px;
-        font-size: 1rem;
+        border: 1px solid $treatment-border-color;
+        background-color: #95c6c4;
+        padding: 0.5rem;
+        box-sizing: border-box;
 
         &:focus {
             outline: none;
-            border-color: #B0C9CB;
+            border-color: #ffffff;
         }
     }
 }

@@ -58,11 +58,16 @@ export class CreateTreatmentComponent {
     return this.treatmentForm.get('medications') as FormArray;
   }
 
-  onMedicamentSelected(medicament: IMedicament, index: number): void {
-    const medication = this.medications.at(index) as FormGroup;
-    medication.controls['medicamentId'].setValue(medicament._id);
-    medication.addControl('substance', this.fb.control(medicament.substance));
+  onMedicamentSelected(medicament: IMedicament): void {
+    const medication = this.fb.group({
+      medicamentId: [medicament._id, Validators.required],
+      schedule: this.fb.array([]),
+      taken: [false],
+      substance: [medicament.substance]
+    });
+    this.medications.push(medication);
   }
+
 
   onSubmit(): void {
     if (this.treatmentForm.valid) {
