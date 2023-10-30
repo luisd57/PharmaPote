@@ -7,31 +7,32 @@
 
     <app-medicament-input (medicamentSelected)="onMedicamentSelected($event)"></app-medicament-input>
 
+    <div class="selected-medicaments-container">
+        <div formArrayName="medications" *ngFor="let medication of medications.controls; let i = index"
+            class="medication-item">
+            <div [formGroupName]="i">
+                <span class="selected-medicament">{{ medication.get('substance')?.value }}</span>
+                <button class="remove-medication-x" (click)="removeMedication(i)">x</button>
+            </div>
+        </div>
+    </div>
+
     <div formArrayName="medications" *ngFor="let medication of medications.controls; let i = index"
-        class="medication-group">
+        class="schedule-group">
         <div [formGroupName]="i">
-
-            <p class="selected-medicament">Selected Medicament: {{ medication.get('substance')?.value }}</p>
-
             <div class="form-group">
                 <label>Add Hour:</label>
                 <input type="time" #timeInput (change)="addScheduleHour(i, timeInput.value)">
             </div>
 
-            <div formArrayName="schedule" *ngFor="let hour of getSchedule(i).controls; let j = index"
-                class="schedule-group">
+            <div formArrayName="schedule" *ngFor="let hour of getSchedule(i).controls; let j = index">
                 <p>
                     {{ hour.value }}
                     <button class="remove-btn" (click)="removeScheduleHour(i, j)">Remove</button>
                 </p>
             </div>
-
-            <button class="remove-btn" (click)="removeMedication(i)">Remove Medication</button>
-
         </div>
     </div>
-
-    <!-- <button class="add-btn" (click)="addMedication()">Add Medication</button> -->
 
     <div class="form-group">
         <label>Strictness Level:</label>
