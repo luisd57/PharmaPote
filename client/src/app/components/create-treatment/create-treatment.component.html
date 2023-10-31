@@ -7,13 +7,13 @@
 
     <app-medicament-input (medicamentSelected)="onMedicamentSelected($event)"></app-medicament-input>
 
-    <div class="selected-medicaments-container">
+    <div class="medicaments-grid">
         <div formArrayName="medications" *ngFor="let medication of medications.controls; let i = index"
-            class="medication-item">
-            <div [formGroupName]="i">
-                <span class="selected-medicament">{{ medication.get('substance')?.value }}</span>
-                <button class="remove-medication-x" (click)="removeMedication(i)">x</button>
+            class="medicament-container">
+            <div [formGroupName]="i" class="medicament-text">
+                {{ medication.get('substance')?.value }}
             </div>
+            <button class="medicament-button" (click)="removeMedication(i)">x</button>
         </div>
     </div>
 
@@ -44,7 +44,7 @@
     </div>
 
     <div class="form-group text-center">
-        <button type="submit">Create Treatment</button>
+        <button class="create-button" type="submit">Create Treatment</button>
     </div>
 
 </form>

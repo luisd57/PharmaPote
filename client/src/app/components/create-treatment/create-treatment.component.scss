@@ -5,14 +5,6 @@ $treatment-border-color: #282828;
     border: 1px solid $treatment-border-color;
     margin: 0 auto;
 
-    .medication-group {
-        margin-top: 2rem;
-    }
-
-    .selected-medicament {
-        margin: 1rem 0;
-    }
-
     .schedule-group {
         display: flex;
         align-items: center;
@@ -35,6 +27,7 @@ $treatment-border-color: #282828;
         display: block;
         font-weight: medium;
         margin-bottom: 0.5rem;
+        margin-top: 10px;
     }
 
     input {
@@ -46,7 +39,7 @@ $treatment-border-color: #282828;
     }
 }
 
-button {
+.create-button {
     display: inline-block;
     background-color: #95c6c4;
     font-weight: 600;
@@ -55,21 +48,6 @@ button {
     margin-top: 1rem;
     cursor: pointer;
 
-    &:hover {
-        background-color: #64a3a1;
-    }
-
-    &.remove-btn {
-        background-color: red;
-        color: white;
-        margin-top: 0.5rem;
-    }
-
-    &.add-btn {
-        background-color: green;
-        color: white;
-        margin-top: 0.5rem;
-    }
 }
 
 .text-center {
@@ -93,38 +71,41 @@ button {
     }
 }
 
+.medicaments-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
 
-.selected-medicaments-container {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 1rem;
-    margin-bottom: 2rem;
+    @media (max-width: 640px) {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    @media (max-width: 400px) {
+        grid-template-columns: 1fr;
+    }
 }
 
-.medication-item {
-    flex: 1 1 calc(33.33% - 1rem);
+.medicament-container {
     display: flex;
-    border: 1px solid $treatment-border-color;
-    position: relative;
+    border: 1px solid black;
+    align-items: center;
+    justify-content: space-between;
+    padding: 4px;
+}
 
-    .selected-medicament {
-        margin: 0;
-        flex: 1;
-        padding: 0.5rem;
-        font-size: small;
-    }
+.medicament-text {
+    flex-grow: 1;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    font-size: small;
+    font-weight: bold;
+}
 
-    .remove-medication-x {
-
-        background: none;
-        border: none;
-        font-size: 1.2rem;
-        cursor: pointer;
-        color: red;
-
-        &:hover {
-            opacity: 0.8;
-            background-color: #f2dada;
-        }
-    }
+.medicament-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 24px;
+    height: 24px;
 }
