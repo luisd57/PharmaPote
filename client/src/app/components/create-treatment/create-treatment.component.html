@@ -11,7 +11,7 @@
         <div formArrayName="medications" *ngFor="let medication of medications.controls; let i = index"
             class="medicament-container">
             <div [formGroupName]="i" class="medicament-text">
-                {{ medication.get('substance')?.value }}
+                {{ medication.get('substance')?.value | slice:0:15 }} (...)
             </div>
             <button class="medicament-button" (click)="removeMedication(i)">x</button>
         </div>

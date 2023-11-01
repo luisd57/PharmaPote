@@ -30,9 +30,9 @@ export class MedicamentInputComponent {
     this.medicamentSelected.emit(medicament);
     this.inputCtrl.reset();
     this.medicaments = [];
-}
+  }
 
-  
+
 
 }
 
