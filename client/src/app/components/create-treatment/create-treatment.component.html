@@ -2,7 +2,7 @@
 
     <div class="form-group">
         <label>Name:</label>
-        <input type="text" formControlName="name">
+        <input class="name-input" type="text" formControlName="name">
     </div>
 
     <app-medicament-input (medicamentSelected)="onMedicamentSelected($event)"></app-medicament-input>
@@ -21,15 +21,7 @@
         class="schedule-group">
         <div [formGroupName]="i">
             <div class="form-group">
-                <label>Add Hour:</label>
                 <input type="time" #timeInput (change)="addScheduleHour(i, timeInput.value)">
-            </div>
-
-            <div formArrayName="schedule" *ngFor="let hour of getSchedule(i).controls; let j = index">
-                <p>
-                    {{ hour.value }}
-                    <button class="remove-btn" (click)="removeScheduleHour(i, j)">Remove</button>
-                </p>
             </div>
         </div>
     </div>
