@@ -17,7 +17,11 @@ export class MedicamentService {
   constructor(private http: HttpClient) { }
 
   getMedicaments(searchTerm?: string): Observable<IMedicament[]> {
-    const url = searchTerm ? `${this.apiURL}?search=${searchTerm}` : this.apiURL;
+    if (!searchTerm) {
+      return throwError(() => new Error('Search term is required'));
+    }
+
+    const url = `${this.apiURL}?search=${searchTerm}`;
     return this.http.get<IMedicament[]>(url, { headers: this.headers }).pipe(
       catchError(err => throwError(() => new Error(err.error.error))),
     );
