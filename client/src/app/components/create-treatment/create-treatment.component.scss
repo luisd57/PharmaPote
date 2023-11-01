@@ -12,12 +12,6 @@ $treatment-border-color: #282828;
         p {
             margin-right: 1rem;
         }
-
-        .remove-btn {
-            margin-top: 5px;
-            background-color: red;
-            color: white;
-        }
     }
 }
 
@@ -110,4 +104,8 @@ $treatment-border-color: #282828;
     justify-content: center;
     width: 24px;
     height: 24px;
+}
+
+.time-input {
+    margin-top: 5px;
 }

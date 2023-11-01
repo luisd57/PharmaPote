@@ -9,6 +9,21 @@
 
     <div class="medicaments-grid">
         <div formArrayName="medications" *ngFor="let medication of medications.controls; let i = index"
+            class="medicament-wrapper">
+            <div [formGroupName]="i" class="medicament-container">
+                <div class="medicament-text">
+                    {{ medication.get('substance')?.value | slice:0:15 }} (...)
+                </div>
+                <button class="medicament-button" (click)="removeMedication(i)">x</button>
+            </div>
+            <div class="time-input-container">
+                <input class="time-input" type="time" #timeInput (change)="addScheduleHour(i, timeInput.value)">
+            </div>
+        </div>
+    </div>
+
+    <!-- <div class="medicaments-grid">
+        <div formArrayName="medications" *ngFor="let medication of medications.controls; let i = index"
             class="medicament-container">
             <div [formGroupName]="i" class="medicament-text">
                 {{ medication.get('substance')?.value | slice:0:15 }} (...)
@@ -24,7 +39,7 @@
                 <input type="time" #timeInput (change)="addScheduleHour(i, timeInput.value)">
             </div>
         </div>
-    </div>
+    </div> -->
 
     <div class="form-group">
         <label>Strictness Level:</label>
