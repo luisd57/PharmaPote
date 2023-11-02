@@ -23,8 +23,7 @@ export class MedicamentService {
 
     const url = `${this.apiURL}?search=${searchTerm}`;
     return this.http.get<IMedicament[]>(url, { headers: this.headers }).pipe(
-      catchError(err => throwError(() => new Error(err.error.error))),
-    );
+      catchError(err => throwError(() => err)));
   }
 
 }

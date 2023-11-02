@@ -32,6 +32,7 @@ export class AuthFormComponent {
   setErrorMessage(message: string): void {
     this.errorMessage = message;
     this.isError = true;
+    console.log('AuthFormComponent Error:', this.errorMessage);
   }
 
 }

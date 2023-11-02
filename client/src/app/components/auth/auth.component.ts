@@ -22,8 +22,10 @@ export class AuthComponent {
         this.router.navigate(['treatments/create']);
       },
       error: (error) => {
-        console.error('Login failed: ', error);
-        this.errorMessage = error.message;
+        this.errorMessage = error.error.message;
+        setTimeout(() => {
+          this.errorMessage = '';
+        }, 5000);
       }
     });
   }
@@ -36,8 +38,10 @@ export class AuthComponent {
         //todo this.router.navigate(['/']);
       },
       error: (error) => {
-        console.error('Registration failed: ', error);
-        this.errorMessage = error.message;
+        this.errorMessage = error.error.message;
+        setTimeout(() => {
+          this.errorMessage = '';
+        }, 5000);
       }
     });
   }

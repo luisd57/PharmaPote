@@ -10,10 +10,16 @@
                 <a [ngClass]="{'active-tab': activeTab === 'register'}" class="tab-link">Register</a>
             </li>
         </ul>
-        <app-auth-form [isLoginMode]="true" [errorMessage]="errorMessage" (onFormSubmit)="onSubmitLogin($event)"
+        <app-auth-form 
+            [isLoginMode]="true" 
+            [errorMessage]="errorMessage" 
+            (onFormSubmit)="onSubmitLogin($event)"
             *ngIf="activeTab === 'login'">
         </app-auth-form>
-        <app-auth-form [isLoginMode]="false" [errorMessage]="errorMessage" (onFormSubmit)="onSubmitRegister($event)"
+        <app-auth-form 
+            [isLoginMode]="false" 
+            [errorMessage]="errorMessage" 
+            (onFormSubmit)="onSubmitRegister($event)"
             *ngIf="activeTab === 'register'">
         </app-auth-form>
     </div>

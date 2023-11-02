@@ -21,22 +21,20 @@ export class AuthService {
 
   register(user: IUser): Observable<AuthResponse> {
     return this.http.post<AuthResponse>(`${this.apiURL}/register`, user, { headers: this.headers, withCredentials: true }).pipe(
-      catchError(err => throwError(() => new Error(err.error.error))),
-      tap(response => this.currentUser = response.user)
-    );
+      tap(response => this.currentUser = response.user),
+      catchError(err => throwError(() => err)));
   }
 
   login(user: IUser): Observable<AuthResponse> {
     return this.http.post<AuthResponse>(`${this.apiURL}/login`, user, { headers: this.headers, withCredentials: true }).pipe(
-      catchError(err => throwError(() => new Error(err.error.error))),
-      tap(response => this.currentUser = response.user)
-    );
+      tap(response => this.currentUser = response.user),
+      catchError(err => throwError(() => err)));
   }
 
   logout(): Observable<any> {
     return this.http.post(`${this.apiURL}/logout`, {}, { headers: this.headers, withCredentials: true }).pipe(
-      catchError(err => throwError(() => new Error(err.error.error))),
-      tap(() => this.currentUser = null)
+      tap(() => this.currentUser = null),
+      catchError(err => throwError(() => err))
     );
   }
 
@@ -46,8 +44,8 @@ export class AuthService {
 
   refreshToken(): Observable<AuthResponse> {
     return this.http.post<AuthResponse>(`${this.apiURL}/token`, {}, { headers: this.headers, withCredentials: true }).pipe(
-      catchError(err => throwError(() => new Error(err.error.error))),
-      tap(response => this.currentUser = response.user)
+      tap(response => this.currentUser = response.user),
+      catchError(err => throwError(() => err))
     );
   }
 
