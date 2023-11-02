@@ -13,6 +13,9 @@ import { AuthFormComponent } from './components/auth-form/auth-form.component';
 import { CreateTreatmentComponent } from './components/create-treatment/create-treatment.component';
 import { ListTreatmentComponent } from './components/list-treatment/list-treatment.component';
 import { MedicamentInputComponent } from './components/medicament-input/medicament-input.component';
+import { FaIconLibrary } from '@fortawesome/angular-fontawesome';
+import { far } from '@fortawesome/free-regular-svg-icons';
+import { fas } from '@fortawesome/free-solid-svg-icons';
 
 @NgModule({
   declarations: [
@@ -34,4 +37,8 @@ import { MedicamentInputComponent } from './components/medicament-input/medicame
   providers: [],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule { 
+  constructor(library: FaIconLibrary) {
+    library.addIconPacks(fas, far);
+  }
+}
