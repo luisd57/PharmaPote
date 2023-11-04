@@ -1,1 +1,23 @@
 <p>list-treatment works!</p>
+<table>
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>State</th>
+            <th>Edit</th>
+            <th>Delete</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let treatment of treatments">
+            <td>{{ treatment.name }}</td>
+            <td>
+                <button (click)="toggleState(treatment)">
+                    {{ treatment.state === 'ongoing' ? 'Ongoing' : 'Finished' }}
+                </button>
+            </td>
+            <td><button>Edit</button></td>
+            <td><button>Delete</button></td>
+        </tr>
+    </tbody>
+</table>

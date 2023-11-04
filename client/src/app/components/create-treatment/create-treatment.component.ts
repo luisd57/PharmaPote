@@ -68,7 +68,6 @@ export class CreateTreatmentComponent {
     this.medications.push(medication);
   }
 
-
   onSubmit(): void {
     if (this.treatmentForm.valid) {
       const userId = this.authService.getCurrentUser()?._id
@@ -78,18 +77,17 @@ export class CreateTreatmentComponent {
         state: 'ongoing'
       };
 
-      this.treatmentService.createTreatment(treatment).subscribe(
-        res => {
+      this.treatmentService.createTreatment(treatment).subscribe({
+        next: (res) => {
           console.log('Treatment created:', res);
           // TODO
         },
-        error => {
+        error: (error) => {
           console.error('Error creating treatment:', error);
           // TODO
         }
-      );
+      });
     }
   }
-
 
 }

@@ -33,7 +33,7 @@ export class TreatmentService {
   }
 
   getUserTreatments(): Observable<ITreatment[]> {
-    return this.http.get<ITreatment[]>(`${this.apiURL}`, { headers: this.headers }).pipe(
+    return this.http.get<ITreatment[]>(`${this.apiURL}`, { headers: this.headers, withCredentials: true }).pipe(
       catchError(err => throwError(() => err)));
   }
 
