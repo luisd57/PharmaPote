@@ -12,6 +12,8 @@ import { TreatmentService } from 'src/app/services/treatment.service';
 export class ListTreatmentComponent {
   treatments: ITreatment[] = [];
   currentUser: IUser | null = null;
+  treatmentStates: ('ongoing' | 'finished')[] = ['ongoing', 'finished'];
+
 
   constructor(private treatmentService: TreatmentService, private authService: AuthService) { }
 
@@ -46,8 +48,15 @@ export class ListTreatmentComponent {
     })
   }
 
-  toggleState(treatment: ITreatment): void {
-    treatment.state = treatment.state === 'ongoing' ? 'finished' : 'ongoing';
+  setTreatmentState(id: string | undefined, state: 'ongoing' | 'finished'): void {
+    this.treatmentService.setTreatmentState(id, state).subscribe({
+      next: () => {
+        this.fetchTreatments();
+      },
+      error: (error) => {
+        console.error("Error setting treatment state:", error);
+      }
+    })
   }
 
   onDeleteTreatment(id: string | undefined): void {

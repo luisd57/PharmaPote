@@ -20,7 +20,7 @@ export const createTreatment = async (treatmentData: ITreatment): Promise<ITreat
             if (!medication.schedule.length || !medication.schedule.every(isValidTime)) {
                 throw new Error('Invalid schedule format or schedule is empty.');
             }
-            
+
         }
 
         if (!treatmentData.userId) {
@@ -34,7 +34,7 @@ export const createTreatment = async (treatmentData: ITreatment): Promise<ITreat
 
         if (!treatmentData.name || treatmentData.name.length < 4) {
             throw new Error('Treatment name should be at least 4 characters long.');
-        }        
+        }
 
         const treatment = new Treatment(treatmentData);
         const savedTreatment = await treatment.save();
@@ -111,6 +111,18 @@ export const setStrictnessLevel = async (treatmentId: string, level: 'low' | 'me
         }
     }
 };
+
+export const setTreatmentState = async (treatmentId: string, state: 'ongoing' | 'finished'): Promise<ITreatment | null> => {
+    try {
+        return await Treatment.findByIdAndUpdate(treatmentId, { $set: { state } }, { new: true });
+    } catch (error) {
+        if (error instanceof Error) {
+            throw new Error('Error while setting state: ' + error.message);
+        } else {
+            throw new Error('An unknown error occurred while setting state')
+        }
+    }
+}
 
 export const getTreatmentsByUserId = async (userId: string | ObjectId): Promise<ITreatment[]> => {
     try {

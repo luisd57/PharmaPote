@@ -42,18 +42,23 @@ export class TreatmentService {
       catchError(err => throwError(() => err)));
   }
 
-  deleteMedicationFromTreatment(treatmentId: number, medicationId: number): Observable<ITreamentResponse> {
+  deleteMedicationFromTreatment(treatmentId: string, medicationId: string): Observable<ITreamentResponse> {
     return this.http.delete<ITreamentResponse>(`${this.apiURL}/${treatmentId}/medications/${medicationId}`, { headers: this.headers }).pipe(
       catchError(err => throwError(() => err)));
   }
 
-  setMedicationSchedule(treatmentId: number, medicationId: number, schedule: string): Observable<ITreamentResponse> {
+  setMedicationSchedule(treatmentId: string, medicationId: string, schedule: string): Observable<ITreamentResponse> {
     return this.http.put<ITreamentResponse>(`${this.apiURL}/${treatmentId}/medications/${medicationId}`, schedule, { headers: this.headers }).pipe(
       catchError(err => throwError(() => err)));
   }
 
   setStrictnessLevel(treatmentId: number, strictnessLevel: string): Observable<ITreamentResponse> {
     return this.http.put<ITreamentResponse>(`${this.apiURL}/${treatmentId}/strictness`, strictnessLevel, { headers: this.headers }).pipe(
+      catchError(err => throwError(() => err)));
+  }
+
+  setTreatmentState(treatmentId: string | undefined, state: string): Observable<ITreamentResponse> {
+    return this.http.put<ITreamentResponse>(`${this.apiURL}/${treatmentId}/state`, { state }, { headers: this.headers }).pipe(
       catchError(err => throwError(() => err)));
   }
 

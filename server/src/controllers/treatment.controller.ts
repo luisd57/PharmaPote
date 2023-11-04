@@ -83,6 +83,24 @@ export const setMedicationSchedule = async (req: Request, res: Response) => {
     }
 };
 
+export const setTreatmentState = async (req: Request, res: Response) => {
+    try {
+        const treatment = await TreatmentService.setTreatmentState(req.params.id, req.body.state);
+        if (treatment) {
+            res.status(200).json(treatment);
+        } else {
+            res.status(404).json({ message: 'Treatment not found' });
+
+        }
+    } catch (error: unknown) {
+        if (error instanceof Error) {
+            res.status(400).json({ message: 'Error setting treatment state', details: error.message });
+        } else {
+            res.status(500).json({ message: 'Error setting treatment state', details: 'An unknown error occurred' });
+        }
+    }
+};
+
 export const setStrictnessLevel = async (req: Request, res: Response) => {
     try {
         const treatment = await TreatmentService.setStrictnessLevel(req.params.id, req.body.strictnessLevel);

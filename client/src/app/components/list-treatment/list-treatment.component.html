@@ -11,9 +11,9 @@
         <tr *ngFor="let treatment of treatments">
             <td>{{ treatment.name }}</td>
             <td>
-                <button (click)="toggleState(treatment)">
-                    {{ treatment.state === 'ongoing' ? 'Ongoing' : 'Finished' }}
-                </button>
+                <select [(ngModel)]="treatment.state" (change)="setTreatmentState(treatment._id, treatment.state)">
+                    <option *ngFor="let state of treatmentStates" [value]="state">{{ state }}</option>
+                </select>
             </td>
             <td><button>Edit</button></td>
             <td><button (click)="onDeleteTreatment(treatment._id)">Delete</button></td>
