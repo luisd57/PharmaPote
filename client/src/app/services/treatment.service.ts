@@ -27,7 +27,7 @@ export class TreatmentService {
       catchError(err => throwError(() => err)));
   }
 
-  deleteTreatment(id: number): Observable<any> {
+  deleteTreatment(id: string | undefined): Observable<any> {
     return this.http.delete(`${this.apiURL}/${id}`, { headers: this.headers }).pipe(
       catchError(err => throwError(() => err)));
   }

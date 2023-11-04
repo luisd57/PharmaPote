@@ -20,8 +20,8 @@ export class ListTreatmentComponent {
   }
 
   checkAuthentication(): void {
-    this.authService.isAuthenticated().subscribe(
-      isAuthenticated => {
+    this.authService.isAuthenticated().subscribe({
+      next: (isAuthenticated) => {
         if (isAuthenticated) {
           this.currentUser = this.authService.getCurrentUser();
           this.fetchTreatments();
@@ -29,10 +29,10 @@ export class ListTreatmentComponent {
           console.warn("User not authenticated. Cannot fetch treatments.");
         }
       },
-      error => {
+      error: (error) => {
         console.error("Error checking authentication:", error);
       }
-    );
+    })
   }
 
   fetchTreatments(): void {
@@ -49,4 +49,17 @@ export class ListTreatmentComponent {
   toggleState(treatment: ITreatment): void {
     treatment.state = treatment.state === 'ongoing' ? 'finished' : 'ongoing';
   }
+
+  onDeleteTreatment(id: string | undefined): void {
+    this.treatmentService.deleteTreatment(id).subscribe({
+      next: () => {
+        this.fetchTreatments();
+      },
+      error: (error) => {
+        console.error("Error deleting treatment:", error);
+      }
+    })
+  }
+
+
 }
