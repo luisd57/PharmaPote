@@ -19,7 +19,7 @@ export class AuthComponent {
       next: (response) => {
         console.log('User logged in successfully');
         alert(`Welcome ${response.user.username}`);
-        this.router.navigate(['treatments/create']);
+        this.router.navigate(['treatments/list']);
       },
       error: (error) => {
         this.errorMessage = error.error.message;
@@ -35,7 +35,7 @@ export class AuthComponent {
       next: (response) => {
         console.log('User registered successfully');
         alert(`Welcome ${response.user.username}`);
-        //todo this.router.navigate(['/']);
+        this.router.navigate(['treatments/list']);
       },
       error: (error) => {
         this.errorMessage = error.error.message;

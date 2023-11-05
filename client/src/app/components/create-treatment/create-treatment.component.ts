@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, FormArray } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
 import { IMedicament } from 'src/app/interfaces/Medication.interface';
 import { ITreatment } from 'src/app/interfaces/Treatment.interface';
 import { AuthService } from 'src/app/services/auth.service';
@@ -10,17 +11,66 @@ import { TreatmentService } from 'src/app/services/treatment.service';
   templateUrl: './create-treatment.component.html',
   styleUrls: ['./create-treatment.component.scss']
 })
-export class CreateTreatmentComponent {
+export class CreateTreatmentComponent implements OnInit {
   treatmentForm: FormGroup;
   maxMedications: number = 6;
   maxScheduleHours: number = 3;
+  isEditMode = false;
 
-  constructor(private fb: FormBuilder, private treatmentService: TreatmentService, private authService: AuthService) {
+  constructor(
+    private fb: FormBuilder,
+    private treatmentService: TreatmentService,
+    private authService: AuthService,
+    private router: Router,
+    public activatedRoute: ActivatedRoute
+  ) {
     this.treatmentForm = this.fb.group({
       name: ['', [Validators.required, Validators.minLength(4)]],
       medications: this.fb.array([]),
       strictnessLevel: ['low', Validators.required]
     });
+  }
+
+  ngOnInit(): void {
+    const treatmentId = this.activatedRoute.snapshot.paramMap.get('id');
+    if (treatmentId) {
+      this.isEditMode = true;
+      this.loadTreatment(treatmentId);
+    }
+  }
+
+
+  loadTreatment(treatmentId: string): void {
+    this.treatmentService.getTreatmentById(treatmentId).subscribe({
+      next: (treatment: ITreatment) => {
+        this.populateForm(treatment);
+      },
+      error: (err) => {
+        console.error('Failed to fetch treatment:', err);
+      }
+    });
+  }
+
+  populateForm(treatment: ITreatment): void {
+    // Populate basic fields
+    this.treatmentForm.patchValue({
+      name: treatment.name,
+      strictnessLevel: treatment.strictnessLevel
+    });
+
+    // Populate medications
+    const medicationFGs = treatment.medications.map(medication => {
+      return this.fb.group({
+        medicamentId: medication.medicamentId,
+        schedule: this.fb.array(medication.schedule || []),
+        taken: medication.taken,
+        substance: '' // You'll need to fetch the substance from the medicament, maybe from a MedicamentService or a lookup map
+      });
+    });
+    const medicationFormArray = this.fb.array(medicationFGs);
+    this.treatmentForm.setControl('medications', medicationFormArray);
+
+    // TODO: Populate substances and any other missing fields.
   }
 
   addMedication(): void {
@@ -69,25 +119,35 @@ export class CreateTreatmentComponent {
   }
 
   onSubmit(): void {
-    if (this.treatmentForm.valid) {
-      const userId = this.authService.getCurrentUser()?._id
-      const treatment: ITreatment = {
-        ...this.treatmentForm.value,
-        userId: userId,
-        state: 'ongoing'
-      };
+    const treatmentId = this.activatedRoute.snapshot.paramMap.get('id');
+    const userId = this.authService.getCurrentUser()?._id;
+    const treatment: ITreatment = {
+      ...this.treatmentForm.value,
+      userId: userId,
+      state: 'ongoing'
+    };
 
+    if (treatmentId) {
+      treatment._id = treatmentId;
+      this.treatmentService.updateTreatment(treatment).subscribe({
+        next: (res) => {
+          console.log('Treatment updated:', res);
+        },
+        error: (error) => {
+          console.error('Error updating treatment:', error);
+        }
+      });
+    } else {
       this.treatmentService.createTreatment(treatment).subscribe({
         next: (res) => {
           console.log('Treatment created:', res);
-          // TODO
         },
         error: (error) => {
           console.error('Error creating treatment:', error);
-          // TODO
         }
       });
     }
   }
+
 
 }

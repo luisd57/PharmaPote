@@ -24,7 +24,7 @@ export class TreatmentService {
   }
 
   updateTreatment(treatment: ITreatment): Observable<ITreamentResponse> {
-    return this.http.put<ITreamentResponse>(`${this.apiURL}/${treatment._id}`, treatment, { headers: this.headers }).pipe(
+    return this.http.put<ITreamentResponse>(`${this.apiURL}/edit/${treatment._id}`, treatment, { headers: this.headers }).pipe(
       catchError(err => throwError(() => err)));
   }
 
@@ -65,6 +65,11 @@ export class TreatmentService {
 
   getTreatmentMedications(treatmentId: string): Observable<IMedicationInTreatment[]> {
     return this.http.get<IMedicationInTreatment[]>(`${this.apiURL}/${treatmentId}/medications`, { headers: this.headers }).pipe(
+      catchError(err => throwError(() => err)));
+  }
+
+  getTreatmentById(treatmentId: string): Observable<ITreatment> {
+    return this.http.get<ITreatment>(`${this.apiURL}/${treatmentId}`, { headers: this.headers }).pipe(
       catchError(err => throwError(() => err)));
   }
 
