@@ -5,6 +5,8 @@ import { IMedicament } from 'src/app/interfaces/Medication.interface';
 import { ITreatment } from 'src/app/interfaces/Treatment.interface';
 import { AuthService } from 'src/app/services/auth.service';
 import { TreatmentService } from 'src/app/services/treatment.service';
+import { forkJoin, map } from 'rxjs';
+import { MedicamentService } from 'src/app/services/medicament.service';
 
 @Component({
   selector: 'app-create-treatment',
@@ -22,7 +24,8 @@ export class CreateTreatmentComponent implements OnInit {
     private treatmentService: TreatmentService,
     private authService: AuthService,
     private router: Router,
-    public activatedRoute: ActivatedRoute
+    public activatedRoute: ActivatedRoute,
+    private medicamentService: MedicamentService
   ) {
     this.treatmentForm = this.fb.group({
       name: ['', [Validators.required, Validators.minLength(4)]],
@@ -58,19 +61,29 @@ export class CreateTreatmentComponent implements OnInit {
       strictnessLevel: treatment.strictnessLevel
     });
 
-    // Populate medications
-    const medicationFGs = treatment.medications.map(medication => {
-      return this.fb.group({
-        medicamentId: medication.medicamentId,
-        schedule: this.fb.array(medication.schedule || []),
-        taken: medication.taken,
-        substance: '' // You'll need to fetch the substance from the medicament, maybe from a MedicamentService or a lookup map
-      });
-    });
-    const medicationFormArray = this.fb.array(medicationFGs);
-    this.treatmentForm.setControl('medications', medicationFormArray);
+    const medicationObservables = treatment.medications.map(medication =>
+      this.medicamentService.getMedicamentById(medication.medicamentId).pipe(
+        map(medicament => {
+          return {
+            ...medication,
+            substance: medicament.substance
+          };
+        })
+      )
+    );
 
-    // TODO: Populate substances and any other missing fields.
+    forkJoin(medicationObservables).subscribe(medicationsWithSubstances => {
+      const medicationFGs = medicationsWithSubstances.map(medication => {
+        return this.fb.group({
+          medicamentId: medication.medicamentId,
+          schedule: this.fb.array(medication.schedule || []),
+          taken: medication.taken,
+          substance: medication.substance
+        });
+      });
+      const medicationFormArray = this.fb.array(medicationFGs);
+      this.treatmentForm.setControl('medications', medicationFormArray);
+    });
   }
 
   addMedication(): void {

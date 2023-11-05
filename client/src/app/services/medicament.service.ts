@@ -26,4 +26,14 @@ export class MedicamentService {
       catchError(err => throwError(() => err)));
   }
 
+  getMedicamentById(id: string): Observable<IMedicament> {
+    if (!id) {
+      return throwError(() => new Error('ID is required'));
+    }
+
+    const url = `${this.apiURL}/${id}`;
+    return this.http.get<IMedicament>(url, { headers: this.headers }).pipe(
+      catchError(err => throwError(() => err)));
+  }
+
 }
