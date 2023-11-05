@@ -35,13 +35,13 @@ export const login = async (req: Request, res: Response): Promise<void> => {
 
         res.cookie('token', token, {
             httpOnly: true,
-            // secure: true, // for prod with https
+            // secure: true,
             maxAge: 15 * 60 * 1000 // 15 min in millis
         });
 
         res.cookie('refreshToken', refreshToken, {
             httpOnly: true,
-            // secure: true, for prod with https
+            // secure: true,
             maxAge: 7 * 24 * 60 * 60 * 1000 // 7 days in milliseconds
         });
 

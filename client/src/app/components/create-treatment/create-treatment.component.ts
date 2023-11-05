@@ -42,7 +42,6 @@ export class CreateTreatmentComponent implements OnInit {
     }
   }
 
-
   loadTreatment(treatmentId: string): void {
     this.treatmentService.getTreatmentById(treatmentId).subscribe({
       next: (treatment: ITreatment) => {
@@ -50,12 +49,12 @@ export class CreateTreatmentComponent implements OnInit {
       },
       error: (err) => {
         console.error('Failed to fetch treatment:', err);
+        //todo show error message to user
       }
     });
   }
 
   populateForm(treatment: ITreatment): void {
-    // Populate basic fields
     this.treatmentForm.patchValue({
       name: treatment.name,
       strictnessLevel: treatment.strictnessLevel
@@ -144,20 +143,21 @@ export class CreateTreatmentComponent implements OnInit {
       treatment._id = treatmentId;
       this.treatmentService.updateTreatment(treatment).subscribe({
         next: (res) => {
-          console.log('Treatment updated:', res);
+          this.router.navigate(['/treatments']);
         },
         error: (error) => {
           console.error('Error updating treatment:', error);
+          //todo show error message to user
         }
       });
     } else {
-      console.log('Treatment Form Value:', this.treatmentForm.value);
       this.treatmentService.createTreatment(treatment).subscribe({
         next: (res) => {
-          console.log('Treatment created:', res);
+          this.router.navigate(['/treatments']);
         },
         error: (error) => {
           console.error('Error creating treatment:', error);
+          //todo show error message to user
         }
       });
     }
