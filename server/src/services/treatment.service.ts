@@ -66,7 +66,12 @@ export const modifyTreatment = async (treatmentId: string, treatmentData: Partia
 
 export const deleteTreatment = async (treatmentId: string): Promise<ITreatment | null> => {
     try {
-        return await Treatment.findByIdAndRemove(treatmentId);
+        const treatment = await Treatment.findByIdAndRemove(treatmentId);;
+        if (treatment) {
+            await User.updateOne({ _id: treatment.userId }, { $pull: { treatments: treatment._id } });
+        }
+
+        return treatment;
     } catch (error) {
         if (error instanceof Error) {
             throw new Error('Error while deleting treatment: ' + error.message);
