@@ -17,8 +17,9 @@
                 <button class="medicament-button" (click)="removeMedication(i)">x</button>
             </div>
             <div class="time-input-container">
-                <input class="time-input" type="time" #timeInput (change)="addScheduleHour(i, timeInput.value)">
+                <input class="time-input" type="time" [formControl]="getHourControlForMedication(i)">
             </div>
+
         </div>
     </div>
 

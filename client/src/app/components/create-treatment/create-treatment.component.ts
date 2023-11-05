@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder, Validators, FormArray } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators, FormArray, AbstractControl, FormControl } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { IMedicament } from 'src/app/interfaces/Medication.interface';
 import { ITreatment } from 'src/app/interfaces/Treatment.interface';
@@ -76,7 +76,7 @@ export class CreateTreatmentComponent implements OnInit {
       const medicationFGs = medicationsWithSubstances.map(medication => {
         return this.fb.group({
           medicamentId: medication.medicamentId,
-          schedule: this.fb.array(medication.schedule || []),
+          schedule: this.fb.array(medication.schedule.map(hour => this.fb.control(hour))),
           taken: medication.taken,
           substance: medication.substance
         });
@@ -124,7 +124,7 @@ export class CreateTreatmentComponent implements OnInit {
   onMedicamentSelected(medicament: IMedicament): void {
     const medication = this.fb.group({
       medicamentId: [medicament._id, Validators.required],
-      schedule: this.fb.array([]),
+      schedule: this.fb.array([this.fb.control('', [Validators.required, Validators.pattern(/^([0-1]?[0-9]|2[0-3]):[0-5][0-9]$/)])]),
       taken: [false],
       substance: [medicament.substance]
     });
@@ -151,6 +151,7 @@ export class CreateTreatmentComponent implements OnInit {
         }
       });
     } else {
+      console.log('Treatment Form Value:', this.treatmentForm.value);
       this.treatmentService.createTreatment(treatment).subscribe({
         next: (res) => {
           console.log('Treatment created:', res);
@@ -161,6 +162,16 @@ export class CreateTreatmentComponent implements OnInit {
       });
     }
   }
+
+  getHourControlForMedication(index: number): FormControl {
+    const schedule = this.getSchedule(index);
+    if (schedule.length === 0) {
+      schedule.push(this.fb.control('', [Validators.required, Validators.pattern(/^([0-1]?[0-9]|2[0-3]):[0-5][0-9]$/)]));
+    }
+    return schedule.at(0) as FormControl;
+  }
+
+
 
 
 }
