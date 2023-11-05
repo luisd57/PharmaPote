@@ -143,7 +143,7 @@ export class CreateTreatmentComponent implements OnInit {
       treatment._id = treatmentId;
       this.treatmentService.updateTreatment(treatment).subscribe({
         next: (res) => {
-          this.router.navigate(['/treatments']);
+          this.router.navigate(['/treatments/list']);
         },
         error: (error) => {
           console.error('Error updating treatment:', error);
@@ -153,7 +153,7 @@ export class CreateTreatmentComponent implements OnInit {
     } else {
       this.treatmentService.createTreatment(treatment).subscribe({
         next: (res) => {
-          this.router.navigate(['/treatments']);
+          this.router.navigate(['/treatments/list']);
         },
         error: (error) => {
           console.error('Error creating treatment:', error);
