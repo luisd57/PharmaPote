@@ -15,8 +15,14 @@
                     <option *ngFor="let state of treatmentStates" [value]="state">{{ state }}</option>
                 </select>
             </td>
-            <td><button [routerLink]="['/treatments/edit', treatment._id]">Edit</button></td>
-            <td><button (click)="onDeleteTreatment(treatment._id)">Delete</button></td>
+            <td><button [routerLink]="['/treatments/edit', treatment._id]">
+                    <fa-icon [icon]="['fas', 'pen-to-square']"></fa-icon>
+                </button>
+            </td>
+            <td><button (click)="onDeleteTreatment(treatment._id)">
+                    <fa-icon [icon]="['fas', 'trash']"></fa-icon>
+                </button>
+            </td>
         </tr>
     </tbody>
 </table>

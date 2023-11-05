@@ -1,0 +1,40 @@
+table {
+    width: 100%;
+    margin-top: 20px;
+    border-collapse: separate;
+    border-spacing: 0 10px;
+    text-align: center;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+th,
+td {
+    padding: 10px;
+}
+
+th {
+    position: sticky;
+    top: 0;
+    border-bottom: 2px solid #e0e0e0;
+}
+
+td {
+    border: none;
+}
+
+button {
+    padding: 5px 10px;
+    border: 1px solid #ccc;
+    // background-color: #f8f8f8;
+    cursor: pointer;
+
+    &:hover {
+        background-color: #e0e0e0;
+    }
+}
+
+select {
+    padding: 5px 10px;
+    border: 1px solid #ccc;
+    cursor: pointer;
+}

@@ -4,8 +4,17 @@
             <span>LOGO</span>
         </div>
         <ul class="menu">
-            <li><a [routerLink]="['/treatments/create']">Create Treatment</a></li>
-            <li><a href="#">Logout</a></li>
+            <li><a [routerLink]="['/treatments/list']">List</a></li>
+            <li>
+                <a [routerLink]="['/treatments/create']">
+                    <fa-icon [icon]="['fas', 'plus']"></fa-icon>
+                </a>
+            </li>
+            <li>
+                <a href="#">
+                    <fa-icon [icon]="['fas', 'arrow-right-from-bracket']"> </fa-icon>
+                </a>
+            </li>
         </ul>
     </div>
 </nav>
