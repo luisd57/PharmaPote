@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable, catchError, throwError } from 'rxjs';
 import { ITreatment } from '../interfaces/Treatment.interface';
 import { ITreamentResponse } from '../interfaces/TreatmentResponse.interface';
+import { IMedicationInTreatment } from '../interfaces/MedicationInTreatment.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -59,6 +60,11 @@ export class TreatmentService {
 
   setTreatmentState(treatmentId: string | undefined, state: string): Observable<ITreamentResponse> {
     return this.http.put<ITreamentResponse>(`${this.apiURL}/${treatmentId}/state`, { state }, { headers: this.headers }).pipe(
+      catchError(err => throwError(() => err)));
+  }
+
+  getTreatmentMedications(treatmentId: string): Observable<IMedicationInTreatment[]> {
+    return this.http.get<IMedicationInTreatment[]>(`${this.apiURL}/${treatmentId}/medications`, { headers: this.headers }).pipe(
       catchError(err => throwError(() => err)));
   }
 

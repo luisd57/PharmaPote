@@ -147,3 +147,15 @@ export const getAllTreatments = async (): Promise<ITreatment[]> => {
         }
     }
 };
+
+export const getTreatmentById = async (treatmentId: string): Promise<ITreatment | null> => {
+    try {
+        return await Treatment.findById(treatmentId);
+    } catch (error) {
+        if (error instanceof Error) {
+            throw new Error('Error while fetching treatment: ' + error.message);
+        } else {
+            throw new Error('An unknown error occurred while fetching treatment');
+        }
+    }
+}

@@ -169,3 +169,22 @@ export const getMedicationsByTreatmentId = async (req: Request, res: Response) =
         return res.status(500).json({ message: 'Internal server error' });
     }
 }
+
+export const getTreatmentById = async (req: Request, res: Response) => {
+    try {
+        const treatmentId = req.params.id;
+        const treatment = await TreatmentService.getTreatmentById(treatmentId);
+
+        if (!treatment) {
+            return res.status(404).json({ message: 'Treatment not found' });
+        }
+
+        return res.status(200).json(treatment);
+    } catch (error) {
+        if (error instanceof Error) {
+            res.status(400).json({ message: 'Error fetching treatment', details: error.message });
+        } else {
+            res.status(500).json({ message: 'Error fetching treatment', details: 'An unknown error occurred' });
+        }
+    }
+}
