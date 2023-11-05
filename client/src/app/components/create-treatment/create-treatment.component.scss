@@ -3,16 +3,9 @@ $treatment-border-color: #282828;
 .treatment-form {
     padding: 1.5rem;
     border: 1px solid $treatment-border-color;
-    margin: 0 auto;
-
-    .schedule-group {
-        display: flex;
-        align-items: center;
-
-        p {
-            margin-right: 1rem;
-        }
-    }
+    margin: 2rem auto;
+    max-width: 620px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
 .form-group {
