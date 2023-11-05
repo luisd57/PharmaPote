@@ -14,10 +14,12 @@ const routes: Routes = [
     path: "", component: NavbarComponent, canActivate: [authGuard],
     children: [
       { path: "treatments/create", component: CreateTreatmentComponent },
+      { path: "treatments/edit/:id", component: CreateTreatmentComponent },
       { path: "treatments/list", component: ListTreatmentComponent },
     ]
   }
 ];
+
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

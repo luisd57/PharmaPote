@@ -1,7 +1,7 @@
 import { Router } from 'express';
 import {
     createTreatment, modifyTreatment, deleteTreatment, deleteMedicationFromTreatment,
-    setMedicationSchedule, setStrictnessLevel, getTreatmentsByUserId, getAllTreatments, setTreatmentState
+    setMedicationSchedule, setStrictnessLevel, getTreatmentsByUserId, getAllTreatments, setTreatmentState, getMedicationsByTreatmentId
 } from '../controllers/treatment.controller';
 import { authenticate } from '../middlewares/auth.middleware';
 import { adminCheck } from '../middlewares/adminCheck.middleware';
@@ -17,5 +17,6 @@ router.put('/treatments/:id/strictness', setStrictnessLevel);
 router.put('/treatments/:id/state', setTreatmentState);
 router.get('/treatments', authenticate, getTreatmentsByUserId);
 router.get('/treatments/all', authenticate, adminCheck, getAllTreatments);
+router.get('/treatments/:id/medications', getMedicationsByTreatmentId);
 
 export default router;

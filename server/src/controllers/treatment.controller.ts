@@ -1,5 +1,6 @@
 import { Request, Response } from 'express';
 import * as TreatmentService from '../services/treatment.service'
+import Treatment from '../schemas/Treatment.schema';
 
 export const createTreatment = async (req: Request, res: Response) => {
     try {
@@ -150,5 +151,21 @@ export const getAllTreatments = async (req: Request, res: Response) => {
         } else {
             res.status(500).json({ message: 'Error fetching treatments', details: 'An unknown error occurred' });
         }
+    }
+}
+
+export const getMedicationsByTreatmentId = async (req: Request, res: Response) => {
+    try {
+        const treatmentId = req.params.id;
+        const treatment = await Treatment.findById(treatmentId).populate('medications.medicamentId');
+
+        if (!treatment) {
+            return res.status(404).json({ message: 'Treatment not found' });
+        }
+
+        return res.status(200).json(treatment.medications);
+    } catch (err) {
+        console.error(err);
+        return res.status(500).json({ message: 'Internal server error' });
     }
 }
