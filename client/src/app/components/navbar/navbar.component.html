@@ -4,7 +4,11 @@
             <span>LOGO</span>
         </div>
         <ul class="menu">
-            <li><a [routerLink]="['/treatments/list']">List</a></li>
+            <li>
+                <a [routerLink]="['/treatments/list']">
+                    <fa-icon [icon]="['fas', 'list-ul']"></fa-icon>
+                </a>
+            </li>
             <li>
                 <a [routerLink]="['/treatments/create']">
                     <fa-icon [icon]="['fas', 'plus']"></fa-icon>
