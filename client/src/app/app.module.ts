@@ -2,10 +2,9 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { LandingComponent } from './components/landing/landing.component';
 import { AuthComponent } from './components/auth/auth.component';
@@ -16,6 +15,7 @@ import { MedicamentInputComponent } from './components/medicament-input/medicame
 import { FontAwesomeModule, FaIconLibrary } from '@fortawesome/angular-fontawesome';
 import { far } from '@fortawesome/free-regular-svg-icons';
 import { fas } from '@fortawesome/free-solid-svg-icons';
+import { CapitalizePipe } from './pipes/capitalize.pipe';
 
 @NgModule({
   declarations: [
@@ -26,7 +26,8 @@ import { fas } from '@fortawesome/free-solid-svg-icons';
     AuthFormComponent,
     CreateTreatmentComponent,
     ListTreatmentComponent,
-    MedicamentInputComponent
+    MedicamentInputComponent,
+    CapitalizePipe
   ],
   imports: [
     BrowserModule,

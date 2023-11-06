@@ -10,12 +10,12 @@
     <tbody class="treatment-table-body">
         <tr class="treatment-table-row" *ngFor="let treatment of treatments">
             <td class="treatment-table-cell">
-                {{ treatment.name }}
+                {{ treatment.name | capitalize }}
             </td>
             <td class="treatment-table-cell">
                 <select class="treatment-state-select" [(ngModel)]="treatment.state"
                     (change)="setTreatmentState(treatment._id, treatment.state)">
-                    <option *ngFor="let state of treatmentStates" [value]="state">{{ state }}</option>
+                    <option *ngFor="let state of treatmentStates" [value]="state">{{ state | capitalize }}</option>
                 </select>
             </td>
             <td class="treatment-table-cell">

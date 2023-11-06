@@ -102,3 +102,25 @@ $treatment-border-color: #282828;
 .time-input {
     margin-top: 5px;
 }
+
+.strictness-level-select,
+.time-input {
+    padding: 7px 10px;
+    border: none;
+    cursor: pointer;
+    background-color: #82ebe6;
+    border-radius: 6px;
+    transition: background-color 0.3s;
+
+    &:hover {
+        background-color: rgba(243, 238, 238, 0.1);
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    &:focus {
+        outline: none;
+        background-color: rgba(255, 255, 255, 0.1);
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+}
