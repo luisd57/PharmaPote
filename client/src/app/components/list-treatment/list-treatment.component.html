@@ -1,25 +1,30 @@
-<table>
-    <thead>
-        <tr>
-            <th>Name</th>
-            <th>State</th>
-            <th>Edit</th>
-            <th>Delete</th>
+<table class="treatment-table">
+    <thead class="treatment-table-head">
+        <tr class="treatment-table-row">
+            <th class="treatment-table-header">Name</th>
+            <th class="treatment-table-header">State</th>
+            <th class="treatment-table-header">Edit</th>
+            <th class="treatment-table-header">Delete</th>
         </tr>
     </thead>
-    <tbody>
-        <tr *ngFor="let treatment of treatments">
-            <td>{{ treatment.name }}</td>
-            <td>
-                <select [(ngModel)]="treatment.state" (change)="setTreatmentState(treatment._id, treatment.state)">
+    <tbody class="treatment-table-body">
+        <tr class="treatment-table-row" *ngFor="let treatment of treatments">
+            <td class="treatment-table-cell">
+                {{ treatment.name }}
+            </td>
+            <td class="treatment-table-cell">
+                <select class="treatment-state-select" [(ngModel)]="treatment.state"
+                    (change)="setTreatmentState(treatment._id, treatment.state)">
                     <option *ngFor="let state of treatmentStates" [value]="state">{{ state }}</option>
                 </select>
             </td>
-            <td><button [routerLink]="['/treatments/edit', treatment._id]">
+            <td class="treatment-table-cell">
+                <button class="edit-button" [routerLink]="['/treatments/edit', treatment._id]">
                     <fa-icon [icon]="['fas', 'pen-to-square']"></fa-icon>
                 </button>
             </td>
-            <td><button (click)="onDeleteTreatment(treatment._id)">
+            <td class="treatment-table-cell">
+                <button class="delete-button" (click)="onDeleteTreatment(treatment._id)">
                     <fa-icon [icon]="['fas', 'trash']"></fa-icon>
                 </button>
             </td>

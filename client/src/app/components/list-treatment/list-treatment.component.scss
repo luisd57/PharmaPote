@@ -1,4 +1,4 @@
-table {
+.treatment-table {
     width: 100%;
     margin-top: 20px;
     border-collapse: separate;
@@ -7,34 +7,51 @@ table {
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
-th,
-td {
+.treatment-table-header {
     padding: 10px;
-}
-
-th {
     position: sticky;
     top: 0;
     border-bottom: 2px solid #e0e0e0;
 }
 
-td {
+.treatment-table-cell {
+    padding: 10px;
     border: none;
 }
 
-button {
-    padding: 5px 10px;
-    border: 1px solid #ccc;
-    // background-color: #f8f8f8;
+.edit-button,
+.delete-button {
+    padding: 7px 10px;
+    border: none;
     cursor: pointer;
+    background-color: transparent;
+    border-radius: 8px;
+    font-size: 1rem;
+    transition: background-color 0.3s;
 
     &:hover {
-        background-color: #e0e0e0;
+        background-color: rgba(255, 255, 255, 0.1);
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     }
 }
 
-select {
-    padding: 5px 10px;
-    border: 1px solid #ccc;
+.treatment-state-select {
+    padding: 7px 10px;
+    border: none;
     cursor: pointer;
+    background-color: transparent;
+    border-radius: 8px;
+    transition: background-color 0.3s;
+
+    &:hover {
+        background-color: rgba(255, 255, 255, 0.1);
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    &:focus {
+        outline: none;
+        background-color: rgba(255, 255, 255, 0.1);
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
 }
