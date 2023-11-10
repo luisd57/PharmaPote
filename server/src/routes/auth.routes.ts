@@ -8,6 +8,6 @@ router.post('/auth/login', login);
 router.post('/auth/logout', logout);
 router.post('/auth/token', token);
 router.get('/auth/isAuthenticated', isAuthenticated);
-router.get('/auth/currentUserRole', getCurrentUserRole);
+router.get('/auth/getCurrentUserRole', getCurrentUserRole);
 
 export default router;

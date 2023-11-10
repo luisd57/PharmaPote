@@ -17,23 +17,53 @@ export class AuthService {
 
   private currentUser: IUser | null = null;
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {
+    this.loadCurrentUser();
+  }
+
+  private loadCurrentUser(): void {
+    const userData = localStorage.getItem('currentUser');
+    if (userData) {
+      this.currentUser = JSON.parse(userData) as IUser;
+    }
+  }
+
+  private storeCurrentUser(user: IUser): void {
+    const userData = {
+      _id: user._id,
+      role: user.role
+    };
+    localStorage.setItem('currentUser', JSON.stringify(userData));
+  }
+
+  private clearCurrentUser(): void {
+    localStorage.removeItem('currentUser');
+  }
 
   register(user: IUser): Observable<AuthResponse> {
     return this.http.post<AuthResponse>(`${this.apiURL}/register`, user, { headers: this.headers, withCredentials: true }).pipe(
-      tap(response => this.currentUser = response.user),
+      tap(response => {
+        this.currentUser = response.user;
+        this.storeCurrentUser(this.currentUser);
+      }),
       catchError(err => throwError(() => err)));
   }
 
   login(user: IUser): Observable<AuthResponse> {
     return this.http.post<AuthResponse>(`${this.apiURL}/login`, user, { headers: this.headers, withCredentials: true }).pipe(
-      tap(response => this.currentUser = response.user),
+      tap(response => {
+        this.currentUser = response.user;
+        this.storeCurrentUser(this.currentUser);
+      }),
       catchError(err => throwError(() => err)));
   }
 
   logout(): Observable<any> {
     return this.http.post(`${this.apiURL}/logout`, {}, { headers: this.headers, withCredentials: true }).pipe(
-      tap(() => this.currentUser = null),
+      tap(() => {
+        this.currentUser = null;
+        this.clearCurrentUser();
+      }),
       catchError(err => throwError(() => err))
     );
   }
@@ -44,7 +74,10 @@ export class AuthService {
 
   refreshToken(): Observable<AuthResponse> {
     return this.http.post<AuthResponse>(`${this.apiURL}/token`, {}, { headers: this.headers, withCredentials: true }).pipe(
-      tap(response => this.currentUser = response.user),
+      tap(response => {
+        this.currentUser = response.user;
+        this.storeCurrentUser(this.currentUser);
+      }),
       catchError(err => throwError(() => err))
     );
   }
@@ -54,7 +87,7 @@ export class AuthService {
   }
 
   isAdmin(): Observable<boolean> {
-    return this.http.get<{ role: string }>(`${this.apiURL}/currentUserRole`, { headers: this.headers, withCredentials: true })
+    return this.http.get<{ role: string }>(`${this.apiURL}/getCurrentUserRole`, { headers: this.headers, withCredentials: true })
       .pipe(
         map(response => response.role === 'admin'),
         catchError(() => of(false))
