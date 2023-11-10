@@ -133,6 +133,7 @@ export class CreateTreatmentComponent implements OnInit {
   onSubmit(): void {
     const treatmentId = this.activatedRoute.snapshot.paramMap.get('id');
     const userId = this.authService.getCurrentUser()?._id;
+    console.log('userId', userId);
     const treatment: ITreatment = {
       ...this.treatmentForm.value,
       userId: userId,
@@ -170,8 +171,5 @@ export class CreateTreatmentComponent implements OnInit {
     }
     return schedule.at(0) as FormControl;
   }
-
-
-
 
 }
