@@ -6,6 +6,8 @@ import { NavbarComponent } from './components/navbar/navbar.component';
 import { authGuard } from './guards/auth.guard';
 import { CreateTreatmentComponent } from './components/create-treatment/create-treatment.component';
 import { ListTreatmentComponent } from './components/list-treatment/list-treatment.component';
+import { DashboardComponent } from './components/dashboard/dashboard.component';
+import { roleGuard } from './guards/role.guard';
 
 const routes: Routes = [
   { path: "", component: LandingComponent },
@@ -16,6 +18,7 @@ const routes: Routes = [
       { path: "treatments/create", component: CreateTreatmentComponent },
       { path: "treatments/edit/:id", component: CreateTreatmentComponent },
       { path: "treatments/list", component: ListTreatmentComponent },
+      { path: "dashboard", component: DashboardComponent }
     ]
   }
 ];

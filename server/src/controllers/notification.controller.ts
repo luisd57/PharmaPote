@@ -10,7 +10,7 @@ export const sendMedicationNotifications = async (req: Request, res: Response) =
     }
 };
 
-export const getNotifications = async (req: Request, res: Response) => {
+export const getUserNotifications = async (req: Request, res: Response) => {
     try {
         const userId = req.query.userId as string;
         const notifications = await NotificationService.getNotificationsForUser(userId);
@@ -27,5 +27,14 @@ export const markAsSeen = async (req: Request, res: Response) => {
         res.status(200).json(updatedNotification);
     } catch (error) {
         res.status(500).json({ message: 'Error marking notification as seen' });
+    }
+};
+
+export const getNotifications = async (req: Request, res: Response) => {
+    try {
+        const notifications = await NotificationService.getNotifications();
+        res.status(200).json(notifications);
+    } catch (error) {
+        res.status(500).json({ message: 'Error fetching notifications' });
     }
 };

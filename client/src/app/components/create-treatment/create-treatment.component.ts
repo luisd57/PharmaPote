@@ -86,22 +86,22 @@ export class CreateTreatmentComponent implements OnInit {
   }
 
   addMedication(): void {
-    if (this.medications.length < this.maxMedications) {
+    if (this.formMedications.length < this.maxMedications) {
       const medication = this.fb.group({
         medicamentId: ['', Validators.required],
         schedule: this.fb.array([]),
         taken: [false]
       });
-      this.medications.push(medication);
+      this.formMedications.push(medication);
     }
   }
 
   removeMedication(index: number): void {
-    this.medications.removeAt(index);
+    this.formMedications.removeAt(index);
   }
 
   getSchedule(medicationIndex: number): FormArray {
-    return this.medications.at(medicationIndex).get('schedule') as FormArray;
+    return this.formMedications.at(medicationIndex).get('schedule') as FormArray;
   }
 
   addScheduleHour(medicationIndex: number, time: string): void {
@@ -116,7 +116,7 @@ export class CreateTreatmentComponent implements OnInit {
     schedule.removeAt(hourIndex);
   }
 
-  get medications(): FormArray {
+  get formMedications(): FormArray {
     return this.treatmentForm.get('medications') as FormArray;
   }
 
@@ -127,7 +127,7 @@ export class CreateTreatmentComponent implements OnInit {
       taken: [false],
       substance: [medicament.substance]
     });
-    this.medications.push(medication);
+    this.formMedications.push(medication);
   }
 
   onSubmit(): void {

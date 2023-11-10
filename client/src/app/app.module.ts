@@ -16,6 +16,7 @@ import { FontAwesomeModule, FaIconLibrary } from '@fortawesome/angular-fontaweso
 import { far } from '@fortawesome/free-regular-svg-icons';
 import { fas } from '@fortawesome/free-solid-svg-icons';
 import { CapitalizePipe } from './pipes/capitalize.pipe';
+import { DashboardComponent } from './components/dashboard/dashboard.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,8 @@ import { CapitalizePipe } from './pipes/capitalize.pipe';
     CreateTreatmentComponent,
     ListTreatmentComponent,
     MedicamentInputComponent,
-    CapitalizePipe
+    CapitalizePipe,
+    DashboardComponent
   ],
   imports: [
     BrowserModule,

@@ -47,3 +47,7 @@ export const getNotificationsForUser = async (userId: string) => {
 export const markNotificationAsSeen = async (notificationId: string) => {
     return await Notification.findByIdAndUpdate(notificationId, { seen: true }, { new: true });
 };
+
+export const getNotifications = async () => {
+    return await Notification.find().sort({ _id: -1 });
+}

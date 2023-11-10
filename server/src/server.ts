@@ -6,6 +6,7 @@ import authRoutes from './routes/auth.routes';
 import treatmentRoutes from './routes/treatment.routes';
 import notificationRoutes from './routes/notification.routes';
 import medicamentRoutes from './routes/medicament.routes';
+import userRoutes from './routes/user.routes';
 import cron from 'node-cron';
 import cookieParser from 'cookie-parser';
 import * as NotificationService from './services/notification.service';
@@ -32,6 +33,7 @@ app.use('/api', authRoutes);
 app.use('/api', treatmentRoutes);
 app.use('/api', notificationRoutes);
 app.use('/api', medicamentRoutes);
+app.use('/api', userRoutes)
 
 cron.schedule('*/1 * * * *', async () => {
     try {

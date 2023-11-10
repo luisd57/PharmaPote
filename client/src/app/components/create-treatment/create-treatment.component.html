@@ -8,7 +8,7 @@
     <app-medicament-input (medicamentSelected)="onMedicamentSelected($event)"></app-medicament-input>
 
     <div class="medicaments-grid">
-        <div formArrayName="medications" *ngFor="let medication of medications.controls; let i = index"
+        <div formArrayName="medications" *ngFor="let medication of formMedications.controls; let i = index"
             class="medicament-wrapper">
             <div [formGroupName]="i" class="medicament-container">
                 <div class="medicament-text">
