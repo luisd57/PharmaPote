@@ -1,5 +1,7 @@
 import { Request, Response } from 'express';
 import * as AuthService from '../services/auth.service';
+import jwt from 'jsonwebtoken';
+import User from '../schemas/User.schema';
 
 export const register = async (req: Request, res: Response): Promise<void> => {
     try {
@@ -108,5 +110,28 @@ export const token = async (req: Request, res: Response): Promise<void> => {
         } else {
             res.status(500).json({ message: 'Error generating token', details: 'An unknown error occurred' });
         }
+    }
+};
+
+export const getCurrentUserRole = async (req: Request, res: Response): Promise<void> => {
+    try {
+        const token = req.cookies ? req.cookies.token : undefined;
+
+        if (!token) {
+            res.status(401).json({ message: "Not authorized" });
+            return;
+        }
+
+        const decoded: any = jwt.verify(token, process.env.JWT_SECRET!);
+        const user = await User.findById(decoded.userId);
+
+        if (!user) {
+            res.status(401).json({ message: "Not authorized" });
+            return;
+        }
+
+        res.status(200).json({ role: user.role });
+    } catch (error) {
+        res.status(500).json({ message: "Error fetching user role", details: error });
     }
 };

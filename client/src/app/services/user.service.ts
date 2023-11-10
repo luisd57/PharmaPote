@@ -17,11 +17,11 @@ export class UserService {
   constructor(private http: HttpClient) { }
 
   getUsers(): Observable<IUser[]> {
-    return this.http.get<IUser[]>(this.apiUrl, { withCredentials: true });
+    return this.http.get<IUser[]>(this.apiUrl, { headers: this.headers, withCredentials: true });
   }
 
   deleteUser(userId: string): Observable<any> {
-    return this.http.delete(`${this.apiUrl}/${userId}`, { withCredentials: true });
+    return this.http.delete(`${this.apiUrl}/${userId}`, { headers: this.headers, withCredentials: true });
   }
 
 }

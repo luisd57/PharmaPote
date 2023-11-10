@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Observable, catchError, tap, throwError } from 'rxjs';
+import { Observable, catchError, map, of, tap, throwError } from 'rxjs';
 import { IUser } from '../interfaces/User.interface';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { AuthResponse } from '../interfaces/AuthResponse.interface';
@@ -53,8 +53,12 @@ export class AuthService {
     return this.currentUser;
   }
 
-  isAdmin(): boolean {
-    return this.currentUser?.role === 'admin';
+  isAdmin(): Observable<boolean> {
+    return this.http.get<{ role: string }>(`${this.apiURL}/currentUserRole`, { headers: this.headers, withCredentials: true })
+      .pipe(
+        map(response => response.role === 'admin'),
+        catchError(() => of(false))
+      );
   }
 
 }
