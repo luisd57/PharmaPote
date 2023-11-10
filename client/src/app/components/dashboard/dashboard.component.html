@@ -1,3 +1,28 @@
-<div *ngFor="let user of users">
-    {{user.username}}
-</div>
+<table class="treatment-table">
+    <thead class="treatment-table-head">
+        <tr class="treatment-table-row">
+            <th class="treatment-table-header">User</th>
+            <th class="treatment-table-header">Treatments</th>
+            <th class="treatment-table-header">Role</th>
+            <th class="treatment-table-header">Delete</th>
+        </tr>
+    </thead>
+    <tbody class="treatment-table-body">
+        <tr class="treatment-table-row" *ngFor="let user of users">
+            <td class="treatment-table-cell">
+                {{ user.username | capitalize }}
+            </td>
+            <td class="treatment-table-cell">
+                {{ user.treatments.length }}
+            </td>
+            <td class="treatment-table-cell">
+                {{ user.role | capitalize }}
+            </td>
+            <td class="treatment-table-cell">
+                <button class="delete-button" (click)="deleteUser(user._id)">
+                    <fa-icon [icon]="['fas', 'trash']"></fa-icon>
+                </button>
+            </td>
+        </tr>
+    </tbody>
+</table>

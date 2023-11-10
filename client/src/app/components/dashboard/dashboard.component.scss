@@ -1,0 +1,57 @@
+.treatment-table {
+    width: 100%;
+    margin-top: 20px;
+    border-collapse: separate;
+    border-spacing: 0 10px;
+    text-align: center;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.treatment-table-header {
+    padding: 10px;
+    position: sticky;
+    top: 0;
+    border-bottom: 2px solid #e0e0e0;
+}
+
+.treatment-table-cell {
+    padding: 10px;
+    border: none;
+}
+
+.edit-button,
+.delete-button {
+    padding: 7px 10px;
+    border: none;
+    cursor: pointer;
+    background-color: transparent;
+    border-radius: 8px;
+    font-size: 1rem;
+    transition: background-color 0.3s;
+
+    &:hover {
+        background-color: rgba(255, 255, 255, 0.1);
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+}
+
+.treatment-state-select {
+    padding: 7px 10px;
+    border: none;
+    cursor: pointer;
+    background-color: transparent;
+    border-radius: 8px;
+    transition: background-color 0.3s;
+
+    &:hover {
+        background-color: rgba(255, 255, 255, 0.1);
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    &:focus {
+        outline: none;
+        background-color: rgba(255, 255, 255, 0.1);
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+}

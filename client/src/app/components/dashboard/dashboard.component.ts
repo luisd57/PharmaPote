@@ -28,7 +28,7 @@ export class DashboardComponent implements OnInit {
     })
   }
 
-  deleteUser(userId: string): void {
+  deleteUser(userId: string | undefined): void {
     this.userService.deleteUser(userId).subscribe({
       next: (response) => {
         console.log("User deleted:", response);

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, UrlTree, Router } from '@angular/router';
+import { CanActivate, UrlTree, Router } from '@angular/router';
 import { Observable, map } from 'rxjs';
 import { AuthService } from '../services/auth.service';
 
@@ -15,7 +15,7 @@ export class RoleGuard implements CanActivate {
         if (isAdmin) {
           return true;
         } else {
-          this.router.navigate(['/auth']);
+          this.router.navigate(['/treatments/list']);
           return false;
         }
       })

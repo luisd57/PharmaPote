@@ -20,7 +20,7 @@ export class UserService {
     return this.http.get<IUser[]>(this.apiUrl, { headers: this.headers, withCredentials: true });
   }
 
-  deleteUser(userId: string): Observable<any> {
+  deleteUser(userId: string | undefined): Observable<any> {
     return this.http.delete(`${this.apiUrl}/${userId}`, { headers: this.headers, withCredentials: true });
   }
 
