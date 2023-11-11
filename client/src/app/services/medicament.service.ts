@@ -22,7 +22,7 @@ export class MedicamentService {
     }
 
     const url = `${this.apiURL}?search=${searchTerm}`;
-    return this.http.get<IMedicament[]>(url, { headers: this.headers }).pipe(
+    return this.http.get<IMedicament[]>(url, { headers: this.headers, withCredentials: true }).pipe(
       catchError(err => throwError(() => err)));
   }
 
@@ -32,7 +32,7 @@ export class MedicamentService {
     }
 
     const url = `${this.apiURL}/${id}`;
-    return this.http.get<IMedicament>(url, { headers: this.headers }).pipe(
+    return this.http.get<IMedicament>(url, { headers: this.headers, withCredentials: true }).pipe(
       catchError(err => throwError(() => err)));
   }
 

@@ -17,7 +17,7 @@ export class NotificationService {
   constructor(private http: HttpClient) { }
 
   getNotifications(): Observable<INotification[]> {
-    return this.http.get<INotification[]>(`${this.apiURL}/all`, { headers: this.headers }).pipe(
+    return this.http.get<INotification[]>(`${this.apiURL}/all`, { headers: this.headers, withCredentials: true }).pipe(
       catchError(err => throwError(() => err)));
   }
 

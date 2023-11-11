@@ -10,6 +10,7 @@ import userRoutes from './routes/user.routes';
 import cron from 'node-cron';
 import cookieParser from 'cookie-parser';
 import * as NotificationService from './services/notification.service';
+import { authenticate } from './middlewares/auth.middleware';
 
 dotenv.config();
 
@@ -30,10 +31,10 @@ app.use(cookieParser());
 
 app.use(express.json());
 app.use('/api', authRoutes);
-app.use('/api', treatmentRoutes);
-app.use('/api', notificationRoutes);
-app.use('/api', medicamentRoutes);
-app.use('/api', userRoutes)
+app.use('/api', authenticate, treatmentRoutes);
+app.use('/api', authenticate, notificationRoutes);
+app.use('/api', authenticate, medicamentRoutes);
+app.use('/api', authenticate, userRoutes)
 
 cron.schedule('*/1 * * * *', async () => {
     try {
