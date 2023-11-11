@@ -3,7 +3,7 @@
         <label for="username">
             Username
         </label>
-        <input type="username" formControlName="username" id="username"
+        <input type="text" formControlName="username" id="username"
             [ngClass]="{ 'is-invalid': authForm.get('username')?.invalid && authForm.get('username')?.touched }"
             required>
     </div>

@@ -2,21 +2,27 @@
 
 <div class="container">
     <div class="tab-container">
-        <ul>
-            <li (click)="activeTab='login'">
-                <a [ngClass]="{'active-tab': activeTab === 'login'}" class="tab-link">Login</a>
+        <ul role="tablist">
+            <li role="presentation" (click)="activeTab='login'">
+                <a id="login-tab" [ngClass]="{'active-tab': activeTab === 'login'}" class="tab-link" role="tab" aria-controls="login-panel" [attr.aria-selected]="activeTab === 'login'">Login</a>
             </li>
-            <li (click)="activeTab='register'">
-                <a [ngClass]="{'active-tab': activeTab === 'register'}" class="tab-link">Register</a>
+            <li role="presentation" (click)="activeTab='register'">
+                <a id="register-tab" [ngClass]="{'active-tab': activeTab === 'register'}" class="tab-link" role="tab" aria-controls="register-panel" [attr.aria-selected]="activeTab === 'register'">Register</a>
             </li>
         </ul>
         <app-auth-form 
+            id="login-panel" 
+            role="tabpanel" 
+            aria-labelledby="login-tab"
             [isLoginMode]="true" 
             [errorMessage]="errorMessage" 
             (onFormSubmit)="onSubmitLogin($event)"
             *ngIf="activeTab === 'login'">
         </app-auth-form>
         <app-auth-form 
+            id="register-panel" 
+            role="tabpanel" 
+            aria-labelledby="register-tab"
             [isLoginMode]="false" 
             [errorMessage]="errorMessage" 
             (onFormSubmit)="onSubmitRegister($event)"

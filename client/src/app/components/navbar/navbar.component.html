@@ -1,26 +1,29 @@
 <nav>
     <div class="nav-container">
-        <div href="#" class="logo">
+        <a href="#" class="logo">
             <span>LOGO</span>
-        </div>
+        </a>
         <ul class="menu">
             <li class="menu-item">
-                <a [routerLink]="['/treatments/list']" routerLinkActive="active-link" class="menu-link">
+                <a [routerLink]="['/treatments/list']" routerLinkActive="active-link" class="menu-link"
+                    aria-label="List treatments">
                     <fa-icon [icon]="['fas', 'list-ul']"></fa-icon>
                 </a>
             </li>
             <li class="menu-item">
-                <a [routerLink]="['/treatments/create']" routerLinkActive="active-link" class="menu-link">
+                <a [routerLink]="['/treatments/create']" routerLinkActive="active-link" class="menu-link"
+                    aria-label="Create treatment">
                     <fa-icon [icon]="['fas', 'plus']"></fa-icon>
                 </a>
             </li>
             <li *ngIf="isAdmin" class="menu-item">
-                <a [routerLink]="['/dashboard']" routerLinkActive="active-link" class="menu-link">
+                <a [routerLink]="['/dashboard']" routerLinkActive="active-link" class="menu-link"
+                    aria-label="Dashboard">
                     <fa-icon [icon]="['fas', 'lock']"></fa-icon>
                 </a>
             </li>
             <li class="menu-item">
-                <a (click)="logout()" href="#" class="menu-link">
+                <a (click)="logout()" href="#" class="menu-link" aria-label="Logout">
                     <fa-icon [icon]="['fas', 'arrow-right-from-bracket']"></fa-icon>
                 </a>
             </li>

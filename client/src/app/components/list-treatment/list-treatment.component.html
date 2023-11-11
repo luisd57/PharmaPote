@@ -13,18 +13,18 @@
                 {{ treatment.name | capitalize }}
             </td>
             <td class="treatment-table-cell">
-                <select class="treatment-state-select" [(ngModel)]="treatment.state"
-                    (change)="setTreatmentState(treatment._id, treatment.state)">
+                <select class="treatment-state-select" [(ngModel)]="treatment.state" 
+                    (change)="setTreatmentState(treatment._id, treatment.state)" aria-label="Set treatment state">
                     <option *ngFor="let state of treatmentStates" [value]="state">{{ state | capitalize }}</option>
                 </select>
             </td>
             <td class="treatment-table-cell">
-                <button class="edit-button" [routerLink]="['/treatments/edit', treatment._id]">
+                <button class="edit-button" [routerLink]="['/treatments/edit', treatment._id]" aria-label="Edit treatment">
                     <fa-icon [icon]="['fas', 'pen-to-square']"></fa-icon>
                 </button>
             </td>
             <td class="treatment-table-cell">
-                <button class="delete-button" (click)="onDeleteTreatment(treatment._id)">
+                <button class="delete-button" (click)="onDeleteTreatment(treatment._id)" aria-label="Delete treatment">
                     <fa-icon [icon]="['fas', 'trash']"></fa-icon>
                 </button>
             </td>

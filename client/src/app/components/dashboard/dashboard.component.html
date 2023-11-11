@@ -19,7 +19,7 @@
                 {{ user.role | capitalize }}
             </td>
             <td class="treatment-table-cell">
-                <button class="delete-button" (click)="deleteUser(user._id)">
+                <button class="delete-button" (click)="deleteUser(user._id)" aria-label="Delete user">
                     <fa-icon [icon]="['fas', 'trash']"></fa-icon>
                 </button>
             </td>

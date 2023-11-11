@@ -1,8 +1,8 @@
 <form [formGroup]="treatmentForm" (ngSubmit)="onSubmit()" class="treatment-form">
 
     <div class="form-group">
-        <label>Treatment name:</label>
-        <input class="name-input" type="text" formControlName="name">
+        <label for="treatment-name">Treatment name:</label>
+        <input id="treatment-name" class="name-input" type="text" formControlName="name">
     </div>
 
     <app-medicament-input (medicamentSelected)="onMedicamentSelected($event)"></app-medicament-input>
@@ -14,18 +14,19 @@
                 <div class="medicament-text">
                     {{ medication.get('substance')?.value | slice:0:15 }} (...)
                 </div>
-                <button class="medicament-button" (click)="removeMedication(i)">x</button>
+                <button class="medicament-button" (click)="removeMedication(i)" aria-label="Remove Medication">x</button>
             </div>
             <div class="time-input-container">
-                <input class="time-input" type="time" [formControl]="getHourControlForMedication(i)">
+                <label for="medication-time-{{i}}" class="visually-hidden">Medication Time</label>
+                <input id="medication-time-{{i}}" class="time-input" type="time" [formControl]="getHourControlForMedication(i)">
             </div>
 
         </div>
     </div>
 
     <div class="form-group">
-        <label>Strictness Level:</label>
-        <select class="strictness-level-select" formControlName="strictnessLevel">
+        <label for="strictness-level">Strictness Level:</label>
+        <select id="strictness-level" class="strictness-level-select" formControlName="strictnessLevel">
             <option value="low">Low</option>
             <option value="medium">Medium</option>
             <option value="high">High</option>
