@@ -36,7 +36,9 @@
         <button class="create-button" type="submit">
             {{ isEditMode ? 'Update Treatment' : 'Create Treatment' }}
         </button>
-
+        <div *ngIf="errorMessage" class="errorMessage">
+            {{ errorMessage }}
+        </div>
     </div>
 
 </form>

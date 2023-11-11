@@ -18,6 +18,8 @@ export class CreateTreatmentComponent implements OnInit {
   maxMedications: number = 6;
   maxScheduleHours: number = 3;
   isEditMode = false;
+  isError: boolean = false;
+  errorMessage: string = '';
 
   constructor(
     private fb: FormBuilder,
@@ -49,7 +51,6 @@ export class CreateTreatmentComponent implements OnInit {
       },
       error: (err) => {
         console.error('Failed to fetch treatment:', err);
-        //todo show error message to user
       }
     });
   }
@@ -148,7 +149,11 @@ export class CreateTreatmentComponent implements OnInit {
         },
         error: (error) => {
           console.error('Error updating treatment:', error);
-          //todo show error message to user
+          this.isError = true;
+          this.errorMessage = error.error.message;
+          setTimeout(() => {
+            this.errorMessage = '';
+          }, 5000);
         }
       });
     } else {
@@ -158,7 +163,11 @@ export class CreateTreatmentComponent implements OnInit {
         },
         error: (error) => {
           console.error('Error creating treatment:', error);
-          //todo show error message to user
+          this.isError = true;
+          this.errorMessage = error.error.message;
+          setTimeout(() => {
+            this.errorMessage = '';
+          }, 5000);
         }
       });
     }
