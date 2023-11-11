@@ -4,10 +4,8 @@ import Medicament from '../schemas/Medicament.schema';
 import User from '../schemas/User.schema';
 import { ObjectId } from 'mongoose';
 
-
-export const createTreatment = async (treatmentData: ITreatment): Promise<ITreatment> => {
+export const validateTreatmentData = async (treatmentData: ITreatment): Promise<ITreatment> => {
     try {
-        // Check if medicamentIds in treatment exist in medicaments collection
         for (const medication of treatmentData.medications) {
             const medicamentExists = await Medicament.findById(medication.medicamentId);
             if (!medicamentExists) {
@@ -23,6 +21,10 @@ export const createTreatment = async (treatmentData: ITreatment): Promise<ITreat
 
         }
 
+        if (!treatmentData.medications.length) {
+            throw new Error('Treatment must have at least one medication.');
+        }
+
         if (!treatmentData.userId) {
             throw new Error('User ID is required.');
         }
@@ -36,6 +38,19 @@ export const createTreatment = async (treatmentData: ITreatment): Promise<ITreat
             throw new Error('Treatment name should be at least 4 characters long.');
         }
 
+        return treatmentData;
+    } catch (error) {
+        if (error instanceof Error) {
+            throw new Error('Error while validating treatment: ' + error.message);
+        } else {
+            throw new Error('An unknown error occurred while validating treatment');
+        }
+    }
+}
+
+export const createTreatment = async (treatmentData: ITreatment): Promise<ITreatment> => {
+    try {
+        await validateTreatmentData(treatmentData);
         const treatment = new Treatment(treatmentData);
         const savedTreatment = await treatment.save();
 
@@ -51,9 +66,9 @@ export const createTreatment = async (treatmentData: ITreatment): Promise<ITreat
     }
 };
 
-
-export const modifyTreatment = async (treatmentId: string, treatmentData: Partial<ITreatment>): Promise<ITreatment | null> => {
+export const modifyTreatment = async (treatmentId: string, treatmentData: ITreatment): Promise<ITreatment | null> => {
     try {
+        await validateTreatmentData(treatmentData);
         return await Treatment.findByIdAndUpdate(treatmentId, treatmentData, { new: true });
     } catch (error) {
         if (error instanceof Error) {

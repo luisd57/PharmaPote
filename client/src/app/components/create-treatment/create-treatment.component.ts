@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder, Validators, FormArray, AbstractControl, FormControl } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators, FormArray, FormControl } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { IMedicament } from 'src/app/interfaces/Medication.interface';
 import { ITreatment } from 'src/app/interfaces/Treatment.interface';
@@ -72,7 +72,7 @@ export class CreateTreatmentComponent implements OnInit {
     );
 
     forkJoin(medicationObservables).subscribe(medicationsWithSubstances => {
-      const medicationFGs = medicationsWithSubstances.map(medication => {
+      const medicationFormGroups = medicationsWithSubstances.map(medication => {
         return this.fb.group({
           medicamentId: medication.medicamentId,
           schedule: this.fb.array(medication.schedule.map(hour => this.fb.control(hour))),
@@ -80,7 +80,7 @@ export class CreateTreatmentComponent implements OnInit {
           substance: medication.substance
         });
       });
-      const medicationFormArray = this.fb.array(medicationFGs);
+      const medicationFormArray = this.fb.array(medicationFormGroups);
       this.treatmentForm.setControl('medications', medicationFormArray);
     });
   }
