@@ -17,7 +17,7 @@ export class NotificationBellComponent implements OnInit, OnDestroy {
   constructor(private notificationService: NotificationService, private authService: AuthService) { }
 
   ngOnInit(): void {
-    const refreshInterval = interval(30000);
+    const refreshInterval = interval(30000); // 30 seconds
     const userId = this.authService.getCurrentUser()?._id;
 
     this.fetchNotificationsSubscription = refreshInterval.pipe(
