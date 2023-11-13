@@ -21,4 +21,14 @@ export class NotificationService {
       catchError(err => throwError(() => err)));
   }
 
+  getUserNotifications(userId: string | undefined): Observable<INotification[]> {
+    return this.http.get<INotification[]>(`${this.apiURL}/${userId}`, { headers: this.headers, withCredentials: true }).pipe(
+      catchError(err => throwError(() => err)));
+  }
+
+  markAsSeen(notificationId: string): Observable<INotification> {
+    return this.http.patch<INotification>(`${this.apiURL}/${notificationId}/seen`, {}, { headers: this.headers, withCredentials: true }).pipe(
+      catchError(err => throwError(() => err)));
+  }
+
 }

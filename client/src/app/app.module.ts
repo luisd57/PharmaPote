@@ -17,6 +17,7 @@ import { far } from '@fortawesome/free-regular-svg-icons';
 import { fas } from '@fortawesome/free-solid-svg-icons';
 import { CapitalizePipe } from './pipes/capitalize.pipe';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
+import { NotificationBellComponent } from './components/notification-bell/notification-bell.component';
 
 @NgModule({
   declarations: [
@@ -29,7 +30,8 @@ import { DashboardComponent } from './components/dashboard/dashboard.component';
     ListTreatmentComponent,
     MedicamentInputComponent,
     CapitalizePipe,
-    DashboardComponent
+    DashboardComponent,
+    NotificationBellComponent
   ],
   imports: [
     BrowserModule,
