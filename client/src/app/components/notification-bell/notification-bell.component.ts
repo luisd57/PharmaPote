@@ -17,16 +17,14 @@ export class NotificationBellComponent implements OnInit, OnDestroy {
   constructor(private notificationService: NotificationService, private authService: AuthService) { }
 
   ngOnInit(): void {
-    const refreshInterval = interval(60000);
+    const refreshInterval = interval(30000);
     const userId = this.authService.getCurrentUser()?._id;
-    console.log("current userId: ", userId);
 
     this.fetchNotificationsSubscription = refreshInterval.pipe(
       startWith(0),
       switchMap(() => this.notificationService.getUserNotifications(userId))
     ).subscribe(notifications => {
       this.notifications = notifications;
-      console.log("notifications: ", notifications)
       this.hasUnseenNotifications = notifications.some(notification => !notification.seen);
     });
   }
@@ -34,4 +32,15 @@ export class NotificationBellComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     this.fetchNotificationsSubscription?.unsubscribe();
   }
+
+  onBellClick(): void {
+    const userId = this.authService.getCurrentUser()?._id;
+    if (userId) {
+      this.notificationService.markAllAsSeen(userId).subscribe(() => {
+        this.notifications.forEach(notification => notification.seen = true);
+        this.hasUnseenNotifications = false;
+      });
+    }
+  }
+
 }

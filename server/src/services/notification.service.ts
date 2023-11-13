@@ -51,4 +51,8 @@ export const markNotificationAsSeen = async (notificationId: string) => {
 
 export const getNotifications = async () => {
     return await Notification.find().sort({ _id: -1 });
-}
+};
+
+export const markAllNotificationsAsSeen = async (userId: string | ObjectId | undefined) => {
+    return await Notification.updateMany({ userId, seen: false }, { seen: true });
+};

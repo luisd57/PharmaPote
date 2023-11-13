@@ -41,3 +41,13 @@ export const getNotifications = async (req: Request, res: Response) => {
         res.status(500).json({ message: 'Error fetching notifications' });
     }
 };
+
+export const markAllAsSeen = async (req: Request, res: Response) => {
+    try {
+        const userId = req.user?._id;
+        await NotificationService.markAllNotificationsAsSeen(userId);
+        res.status(200).json({ message: 'All notifications marked as seen' });
+    } catch (error) {
+        res.status(500).json({ message: 'Error marking all notifications as seen' });
+    }
+};

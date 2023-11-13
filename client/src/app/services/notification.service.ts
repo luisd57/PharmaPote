@@ -31,4 +31,9 @@ export class NotificationService {
       catchError(err => throwError(() => err)));
   }
 
+  markAllAsSeen(userId: string): Observable<INotification[]> {
+    return this.http.put<INotification[]>(`${this.apiURL}/all/seen`, { userId }, { headers: this.headers, withCredentials: true })
+      .pipe(catchError(err => throwError(() => err)));
+  }
+
 }
