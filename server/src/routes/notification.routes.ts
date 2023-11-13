@@ -3,7 +3,7 @@ import { getUserNotifications, markAsSeen, getNotifications } from '../controlle
 
 const router: Router = Router();
 
-router.get('/notifications', getUserNotifications);
+router.get('/notifications/:userId', getUserNotifications);
 router.patch('/notifications/:notificationId/seen', markAsSeen);
 router.get('/notifications/all', getNotifications);
 

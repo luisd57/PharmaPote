@@ -12,7 +12,10 @@ export const sendMedicationNotifications = async (req: Request, res: Response) =
 
 export const getUserNotifications = async (req: Request, res: Response) => {
     try {
-        const userId = req.query.userId as string;
+        if (!req.user || !req.user._id) {
+            return res.status(401).json({ message: 'User not authenticated' });
+        }
+        const userId = req.user._id;
         const notifications = await NotificationService.getNotificationsForUser(userId);
         res.status(200).json(notifications);
     } catch (error) {

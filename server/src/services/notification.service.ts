@@ -3,6 +3,7 @@ import Notification from '../schemas/Notification.schema';
 import Medicament from '../schemas/Medicament.schema';
 import moment from 'moment';
 import { IMedicament } from '../interfaces/Medicament.interface';
+import { ObjectId } from 'mongoose';
 
 export const sendMedicationNotifications = async (): Promise<number> => {
     const currentHour = moment().format("HH:mm");
@@ -39,7 +40,7 @@ export const sendMedicationNotifications = async (): Promise<number> => {
     return notificationsSentCount;
 };
 
-export const getNotificationsForUser = async (userId: string) => {
+export const getNotificationsForUser = async (userId: string | ObjectId) => {
     return await Notification.find({ userId }).sort({ _id: -1 });  // sort by most recent
 };
 
