@@ -1,7 +1,13 @@
 <nav>
     <div class="nav-container">
-        <span class="logo">LOGO</span>
+        <img class="logo" src="../../../assets/logo.png" alt="App logo">
         <ul class="menu">
+            <li *ngIf="isAdmin" class="menu-item">
+                <a [routerLink]="['/dashboard']" routerLinkActive="active-link" class="menu-link"
+                    aria-label="Dashboard">
+                    <fa-icon [icon]="['fas', 'lock']"></fa-icon>
+                </a>
+            </li>
             <li class="menu-item">
                 <a [routerLink]="['/treatments/list']" routerLinkActive="active-link" class="menu-link"
                     aria-label="List treatments">
@@ -14,14 +20,9 @@
                     <fa-icon [icon]="['fas', 'plus']"></fa-icon>
                 </a>
             </li>
-            <li *ngIf="isAdmin" class="menu-item">
-                <a [routerLink]="['/dashboard']" routerLinkActive="active-link" class="menu-link"
-                    aria-label="Dashboard">
-                    <fa-icon [icon]="['fas', 'lock']"></fa-icon>
-                </a>
-            </li>
             <li class="menu-item">
-                <app-notification-bell></app-notification-bell>
+                <app-notification-bell class="menu-link"></app-notification-bell>
+            </li>    
             <li class="menu-item">
                 <a (click)="logout()" href="#" class="menu-link" aria-label="Logout">
                     <fa-icon [icon]="['fas', 'arrow-right-from-bracket']"></fa-icon>

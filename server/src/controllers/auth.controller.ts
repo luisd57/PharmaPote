@@ -11,7 +11,7 @@ export const register = async (req: Request, res: Response): Promise<void> => {
         res.cookie('token', token, {
             httpOnly: true,
             // secure: true, for prod with https
-            maxAge: 15 * 60 * 1000 // 15 min in millis
+            maxAge: 60 * 60 * 1000 // 60 min in millis
         });
 
         res.cookie('refreshToken', refreshToken, {
