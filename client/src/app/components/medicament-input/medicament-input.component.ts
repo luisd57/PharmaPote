@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Output } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { debounceTime, filter, switchMap } from 'rxjs';
+import { debounceTime, filter, of, switchMap } from 'rxjs';
 import { IMedicament } from 'src/app/interfaces/Medication.interface';
 import { MedicamentService } from 'src/app/services/medicament.service';
 
@@ -20,12 +20,18 @@ export class MedicamentInputComponent {
   ngOnInit(): void {
     this.inputCtrl.valueChanges.pipe(
       debounceTime(300),
-      filter(value => !!value && value.trim().length > 0),
-      switchMap(value => this.medicamentService.getMedicaments(value))
+      switchMap(value => {
+        if (value && value.trim().length > 0) {
+          return this.medicamentService.getMedicaments(value);
+        } else {
+          return of([]);
+        }
+      })
     ).subscribe(data => {
       this.medicaments = data;
     });
   }
+
 
   selectMedicament(medicament: IMedicament): void {
     this.medicamentSelected.emit(medicament);

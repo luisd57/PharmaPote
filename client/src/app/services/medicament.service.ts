@@ -16,7 +16,7 @@ export class MedicamentService {
 
   constructor(private http: HttpClient) { }
 
-  getMedicaments(searchTerm?: string): Observable<IMedicament[]> {
+  getMedicaments(searchTerm: string): Observable<IMedicament[]> {
     if (!searchTerm) {
       return throwError(() => new Error('Search term is required'));
     }
