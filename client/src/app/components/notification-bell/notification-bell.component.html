@@ -1,1 +1,10 @@
-<fa-icon (click)="onBellClick()" [icon]="['fas', 'bell']" [ngClass]="{'highlighted': hasUnseenNotifications}"></fa-icon>
+<fa-icon class="notification-bell" 
+         (click)="toggleNotificationsPanel()"
+         [icon]="['fas', 'bell']"
+         [ngClass]="{'highlighted': hasUnseenNotifications}">
+</fa-icon>
+<div *ngIf="showNotificationsPanel" class="notifications-panel">
+  <div *ngFor="let notification of notifications" class="notification-message">
+    {{ notification.message }}
+  </div>
+</div>

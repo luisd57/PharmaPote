@@ -13,19 +13,21 @@ export class NotificationBellComponent implements OnInit, OnDestroy {
   notifications: INotification[] = [];
   hasUnseenNotifications: boolean = false;
   private fetchNotificationsSubscription?: Subscription;
+  showNotificationsPanel: boolean = false;
 
   constructor(private notificationService: NotificationService, private authService: AuthService) { }
 
   ngOnInit(): void {
-    const refreshInterval = interval(30000); // 30 seconds
+    const refreshInterval = interval(30000);
     const userId = this.authService.getCurrentUser()?._id;
 
     this.fetchNotificationsSubscription = refreshInterval.pipe(
       startWith(0),
       switchMap(() => this.notificationService.getUserNotifications(userId))
-    ).subscribe(notifications => {
-      this.notifications = notifications;
-      this.hasUnseenNotifications = notifications.some(notification => !notification.seen);
+    ).subscribe(allNotifications => {
+      const unseenNotifications = allNotifications.filter(n => !n.seen).slice(0, 6);
+      this.notifications = unseenNotifications;
+      this.hasUnseenNotifications = unseenNotifications.length > 0;
     });
   }
 
@@ -34,11 +36,22 @@ export class NotificationBellComponent implements OnInit, OnDestroy {
   }
 
   onBellClick(): void {
+    this.toggleNotificationsPanel();
+  }
+
+  toggleNotificationsPanel(): void {
+    this.showNotificationsPanel = !this.showNotificationsPanel;
+
+    if (this.showNotificationsPanel) {
+      this.markNotificationsAsSeen();
+    }
+  }
+
+  markNotificationsAsSeen(): void {
     const userId = this.authService.getCurrentUser()?._id;
-    if (userId) {
+    if (userId && this.hasUnseenNotifications) {
       this.notificationService.markAllAsSeen(userId).subscribe(() => {
-        this.notifications.forEach(notification => notification.seen = true);
-        this.hasUnseenNotifications = false;
+        this.notifications = this.notifications.filter(notification => !notification.seen);
       });
     }
   }

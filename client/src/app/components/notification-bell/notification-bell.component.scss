@@ -5,3 +5,28 @@ fa-icon {
 .highlighted {
   color: red;
 }
+
+.notifications-panel {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  left: 0; /* Add this line */
+  margin-right: 10px; /* This will ensure there is space on the right side */
+  margin-left: 10px; 
+  z-index: 1000;
+  background-color: #82ebe6;
+  border-radius: 6px;
+  transition: background-color 0.3s;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  max-height: 300px;
+  overflow-y: auto;
+}
+
+.notification-message {
+  padding: 0.5rem 1rem;
+  border-bottom: 1px solid #eee;
+
+  &:last-child {
+    border-bottom: none;
+  }
+}
