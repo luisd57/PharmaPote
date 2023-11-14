@@ -24,8 +24,8 @@ export class NotificationBellComponent implements OnInit, OnDestroy {
     this.fetchNotificationsSubscription = refreshInterval.pipe(
       startWith(0),
       switchMap(() => this.notificationService.getUserNotifications(userId))
-    ).subscribe(allNotifications => {
-      const unseenNotifications = allNotifications.filter(n => !n.seen).slice(0, 6);
+    ).subscribe(notifications => {
+      const unseenNotifications = notifications.filter(notification => !notification.seen).slice(0, 6);
       this.notifications = unseenNotifications;
       this.hasUnseenNotifications = unseenNotifications.length > 0;
     });
@@ -36,13 +36,10 @@ export class NotificationBellComponent implements OnInit, OnDestroy {
   }
 
   onBellClick(): void {
-    this.toggleNotificationsPanel();
-  }
-
-  toggleNotificationsPanel(): void {
-    this.showNotificationsPanel = !this.showNotificationsPanel;
-
     if (this.showNotificationsPanel) {
+      this.showNotificationsPanel = false;
+    } else {
+      this.showNotificationsPanel = true;
       this.markNotificationsAsSeen();
     }
   }
@@ -51,9 +48,9 @@ export class NotificationBellComponent implements OnInit, OnDestroy {
     const userId = this.authService.getCurrentUser()?._id;
     if (userId && this.hasUnseenNotifications) {
       this.notificationService.markAllAsSeen(userId).subscribe(() => {
-        this.notifications = this.notifications.filter(notification => !notification.seen);
+        this.notifications.forEach(notification => notification.seen = true);
+        this.hasUnseenNotifications = false;
       });
     }
   }
-
 }
