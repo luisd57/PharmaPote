@@ -27,8 +27,8 @@ export class MedicamentInputComponent {
           return of([]);
         }
       })
-    ).subscribe(data => {
-      this.medicaments = data;
+    ).subscribe((data: IMedicament[]) => {
+      this.medicaments = data.slice(0, 10);
     });
   }
 

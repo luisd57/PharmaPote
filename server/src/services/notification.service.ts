@@ -29,7 +29,6 @@ export const sendMedicationNotifications = async (): Promise<number> => {
                 await notification.save();
                 notificationsSentCount++;
 
-                // Update the notificationsSent for the medication
                 medication.notificationsSent = medication.notificationsSent || [];
                 medication.notificationsSent.push(currentHour);
             }
