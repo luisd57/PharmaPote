@@ -8,8 +8,8 @@ import { ObjectId } from 'mongoose';
 export const sendMedicationNotifications = async (): Promise<number> => {
     const currentHour = moment().format("HH:mm");
     const treatments = await Treatment.find({
-        "medications.schedule": currentHour,
-        "medications.notificationsSent": { $ne: currentHour }
+        "medications.schedule": currentHour
+        // "medications.notificationsSent": { $ne: currentHour }
     });
 
     let notificationsSentCount = 0;
