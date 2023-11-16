@@ -14,9 +14,17 @@ const generateRefreshToken = (): string => {
 };
 
 export const registerUser = async (username: string, password: string): Promise<{ token: string, refreshToken: string, user: IUser }> => {
-    if (password.length < 6) {
-        throw new Error('Password must be at least 6 characters.');
+    if (username.length < 4) {
+        throw new Error('Username must be at least 4 characters.');
     }
+
+    const hasNumber = /\d/.test(password);
+    const hasLetter = /[a-zA-Z]/.test(password);
+    // const hasSpecialChar = /[!@#$%^&*(),.?":{}|<>]/.test(password);
+    if (!hasNumber || !hasLetter /*|| !hasSpecialChar*/ || password.length < 6) {
+        throw new Error('Password must be at least 6 characters and include at least one letter and one number');
+    }
+
 
     const existingUser: IUser | null = await User.findOne({ username });
     if (existingUser) {
