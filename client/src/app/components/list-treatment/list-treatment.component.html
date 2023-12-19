@@ -1,14 +1,14 @@
-<table class="treatment-table">
-    <thead class="treatment-table-head">
-        <tr class="treatment-table-row">
-            <th class="treatment-table-header">Name</th>
-            <th class="treatment-table-header">State</th>
-            <th class="treatment-table-header">Edit</th>
-            <th class="treatment-table-header">Delete</th>
+<table class="treatment-table" aria-label="Treatment management table">
+    <thead>
+        <tr>
+            <th class="treatment-table-header" scope="col">Name</th>
+            <th class="treatment-table-header" scope="col">State</th>
+            <th class="treatment-table-header" scope="col">Edit</th>
+            <th class="treatment-table-header" scope="col">Delete</th>
         </tr>
     </thead>
-    <tbody class="treatment-table-body">
-        <tr class="treatment-table-row" *ngFor="let treatment of treatments">
+    <tbody>
+        <tr *ngFor="let treatment of treatments">
             <td class="treatment-table-cell">
                 {{ treatment.name | capitalize }}
             </td>

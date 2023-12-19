@@ -6,8 +6,6 @@ $form-border-color: #282828;
     text-align: center;
     padding: 10px;
     background-color: rgba(255, 255, 255, 0.2);
-    // border-bottom: #0ab8b4 2px solid;
-    // border-bottom: #e9bead 2px solid;
 }
 
 .container {
@@ -62,5 +60,26 @@ $form-border-color: #282828;
                 }
             }
         }
+    }
+}
+
+.tab-container button {
+    background: none;
+    border: none;
+    padding: 0.5rem 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    color: inherit;
+    text-align: center;
+    display: inline-block;
+    margin-right: 0.5rem;
+
+    &:focus {
+        outline: none;
+    }
+
+    &.active-tab {
+        border-bottom: 2px solid $form-border-color;
+        color: $form-border-color;
     }
 }

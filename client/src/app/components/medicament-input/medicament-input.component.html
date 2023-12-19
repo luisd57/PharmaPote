@@ -1,7 +1,8 @@
 <div class="medicament-input">
-    <input type="text" [formControl]="inputCtrl" placeholder="Search and click on medicaments to add them...">
-    <ul *ngIf="medicaments.length">
-        <li *ngFor="let medicament of medicaments" (click)="selectMedicament(medicament)">
+    <input type="text" [formControl]="inputCtrl" placeholder="Search and click on medicaments to add them..."
+        aria-haspopup="listbox" aria-expanded="medicaments.length > 0" role="combobox">
+    <ul *ngIf="medicaments.length" role="listbox">
+        <li *ngFor="let medicament of medicaments" (click)="selectMedicament(medicament)" role="option">
             {{ medicament.substance }} - {{ medicament.dosage }}
         </li>
     </ul>

@@ -1,14 +1,14 @@
-<table class="treatment-table">
-    <thead class="treatment-table-head">
-        <tr class="treatment-table-row">
-            <th class="treatment-table-header">User</th>
-            <th class="treatment-table-header">Treatments</th>
-            <th class="treatment-table-header">Role</th>
-            <th class="treatment-table-header">Delete</th>
+<table class="treatment-table" aria-label="User management table">
+    <thead>
+        <tr>
+            <th class="treatment-table-header" scope="col">User</th>
+            <th class="treatment-table-header" scope="col">Treatments</th>
+            <th class="treatment-table-header" scope="col">Role</th>
+            <th class="treatment-table-header" scope="col">Delete</th>
         </tr>
     </thead>
-    <tbody class="treatment-table-body">
-        <tr class="treatment-table-row" *ngFor="let user of users">
+    <tbody>
+        <tr *ngFor="let user of users">
             <td class="treatment-table-cell">
                 {{ user.username | capitalize }}
             </td>

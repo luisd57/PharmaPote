@@ -1,7 +1,8 @@
 <fa-icon class="notification-bell" 
          (click)="onBellClick()"
          [icon]="['fas', 'bell']"
-         [ngClass]="{'highlighted': hasUnseenNotifications}">
+         [ngClass]="{'highlighted': hasUnseenNotifications}"
+         aria-label="Notifications">
 </fa-icon>
 <div *ngIf="showNotificationsPanel" class="notifications-panel">
   <ng-container *ngIf="notifications.length; else noNotifications">

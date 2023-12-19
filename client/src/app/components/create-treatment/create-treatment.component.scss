@@ -8,6 +8,17 @@ $treatment-border-color: #282828;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
+fieldset {
+    border: none;
+    padding: 0;
+    margin: 0;
+    min-width: 0;
+
+    legend {
+        padding: 0;
+    }
+}
+
 .form-group {
     margin-bottom: 1.5rem;
 

@@ -1,13 +1,15 @@
-<div class="title">PharmaPote</div>
+<header class="title">PharmaPote</header>
 
-<div class="container">
+<section class="container">
     <div class="tab-container">
         <ul role="tablist">
             <li role="presentation" (click)="activeTab='login'">
-                <a id="login-tab" [ngClass]="{'active-tab': activeTab === 'login'}" class="tab-link" role="tab" aria-controls="login-panel" [attr.aria-selected]="activeTab === 'login'">Login</a>
+                <button id="login-tab" [ngClass]="{'active-tab': activeTab === 'login'}" class="tab-link" role="tab"
+                 aria-controls="login-panel" [attr.aria-selected]="activeTab === 'login'">Login</button>
             </li>
             <li role="presentation" (click)="activeTab='register'">
-                <a id="register-tab" [ngClass]="{'active-tab': activeTab === 'register'}" class="tab-link" role="tab" aria-controls="register-panel" [attr.aria-selected]="activeTab === 'register'">Register</a>
+                <button id="register-tab" [ngClass]="{'active-tab': activeTab === 'register'}" class="tab-link" role="tab"
+                 aria-controls="register-panel" [attr.aria-selected]="activeTab === 'register'">Register</button>
             </li>
         </ul>
         <app-auth-form 
@@ -29,4 +31,4 @@
             *ngIf="activeTab === 'register'">
         </app-auth-form>
     </div>
-</div>
+</section>
