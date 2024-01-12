@@ -1,7 +1,7 @@
 $treatment-border-color: #282828;
 
 .treatment-form {
-    padding: 1.5rem;
+    padding: 1rem;
     border: 1px solid $treatment-border-color;
     margin: 2rem auto;
     max-width: 620px;
@@ -36,6 +36,7 @@ fieldset {
         padding: 0.5rem;
         box-sizing: border-box;
         margin-top: 5px;
+        font-size: 0.875rem;
     }
 }
 
@@ -47,42 +48,17 @@ fieldset {
     border: 2px solid;
     margin-top: 1rem;
     cursor: pointer;
-
+    width: 100%;
 }
 
 .text-center {
     text-align: center;
 }
 
-@media (max-width: 640px) {
-
-    form {
-        padding: 1rem;
-    }
-
-    .form-group {
-        input {
-            font-size: 0.875rem;
-        }
-    }
-
-    button {
-        width: 100%;
-    }
-}
-
 .medicaments-grid {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: 1fr;
     gap: 10px;
-
-    @media (max-width: 640px) {
-        grid-template-columns: repeat(2, 1fr);
-    }
-
-    @media (max-width: 400px) {
-        grid-template-columns: 1fr;
-    }
 }
 
 .medicament-container {
@@ -156,4 +132,30 @@ fieldset {
     height: 1px !important;
     width: 1px !important;
     overflow: hidden;
+}
+
+@media (min-width: 400px) {
+    .medicaments-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (min-width: 640px) {
+    .treatment-form {
+        padding: 1.5rem;
+    }
+
+    .form-group {
+        input {
+            font-size: 1rem;
+        }
+    }
+
+    .create-button {
+        width: auto;
+    }
+
+    .medicaments-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
 }

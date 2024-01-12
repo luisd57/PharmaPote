@@ -1,7 +1,7 @@
 $form-border-color: #282828;
 
 form {
-    padding: 1.5rem;
+    padding: 1rem;
     border: 1px solid $form-border-color;
     margin: 0 auto;
 }
@@ -27,6 +27,7 @@ fieldset {
         background-color: #95c6c4;
         padding: 0.5rem;
         box-sizing: border-box;
+        font-size: 0.875rem;
     }
 }
 
@@ -38,6 +39,7 @@ button {
     border: 2px solid;
     margin-top: 1rem;
     cursor: pointer;
+    width: 100%;
 
     &:hover {
         background-color: #64a3a1;
@@ -64,19 +66,18 @@ button {
     border-color: red !important;
 }
 
-@media (max-width: 740px) {
-
+@media (min-width: 741px) {
     form {
-        padding: 1rem;
+        padding: 1.5rem;
     }
 
     .form-group {
         input {
-            font-size: 0.875rem;
+            font-size: 1rem;
         }
     }
 
     button {
-        width: 100%;
+        width: auto;
     }
 }

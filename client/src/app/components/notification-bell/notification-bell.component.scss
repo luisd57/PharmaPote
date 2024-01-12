@@ -11,8 +11,8 @@ fa-icon {
   top: 100%;
   right: 0;
   left: 0;
-  margin-right: 500px;
-  margin-left: 500px; 
+  margin-right: 40px;
+  margin-left: 40px;
   z-index: 1000;
   background-color: #82ebe6;
   border-radius: 6px;
@@ -20,13 +20,7 @@ fa-icon {
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   max-height: 300px;
   overflow-y: auto;
-  text-align: center;
-
-  @media (max-width: 740px) {
-    margin-right: 40px;
-    margin-left: 40px;
-    text-align: start;
-  }
+  text-align: start;
 }
 
 .notification-message {
@@ -34,6 +28,14 @@ fa-icon {
   border-bottom: 1px solid #eee;
 
   &:last-child {
-    border-bottom: none;
+      border-bottom: none;
+  }
+}
+
+@media (min-width: 740px) {
+  .notifications-panel {
+      margin-right: 500px;
+      margin-left: 500px;
+      text-align: center;
   }
 }
