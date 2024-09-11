@@ -41,8 +41,8 @@ describe('Treatment Service', () => {
             (User.findById as jest.Mock).mockResolvedValue({ _id: sampleTreatmentData.userId });
 
             const result = await validateTreatmentData(sampleTreatmentData as ITreatment);
-            expect(result).not.toEqual(sampleTreatmentData); // will fail
-            // expect(result).toEqual(sampleTreatmentData);
+            // expect(result).not.toEqual(sampleTreatmentData); // will fail
+            expect(result).toEqual(sampleTreatmentData);
         });
 
         it('should throw an error for non-existent medicament', async () => {
