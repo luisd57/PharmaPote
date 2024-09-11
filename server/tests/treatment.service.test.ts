@@ -8,12 +8,26 @@ import {
 import Treatment from '../src/schemas/Treatment.schema';
 import Medicament from '../src/schemas/Medicament.schema';
 import User from '../src/schemas/User.schema';
-import { ITreatmentTest } from '../src/interfaces/TreatmentTest.interface';
 import { ITreatment } from '../src/interfaces/Treatment.interface';
 
 jest.mock('../src/schemas/Treatment.schema');
 jest.mock('../src/schemas/Medicament.schema');
 jest.mock('../src/schemas/User.schema');
+
+interface ITreatmentTest {
+    userId: string;
+    name: string;
+    medications: IMedicationInTreatmentTest[];
+    state: 'ongoing' | 'finished';
+    strictnessLevel: 'low' | 'medium' | 'high';
+}
+
+interface IMedicationInTreatmentTest {
+    medicamentId: string;
+    schedule: string[];
+    taken: boolean;
+    notificationsSent: string[];
+}
 
 const sampleTreatmentData: ITreatmentTest = {
     userId: new mongoose.Types.ObjectId().toString(),
@@ -66,6 +80,33 @@ describe('Treatment Service', () => {
 
             const result = await createTreatment(sampleTreatmentData as ITreatment);
             expect(result).toEqual(mockSavedTreatment);
+        });
+
+        it('should throw an error when creating a treatment with invalid data', async () => {
+            // invalid treatment data
+            const invalidTreatmentData: ITreatmentTest = {
+                userId: new mongoose.Types.ObjectId().toString(),
+                name: 'Inv', // name too short
+                medications: [
+                    {
+                        medicamentId: new mongoose.Types.ObjectId().toString(),
+                        schedule: [], // empty schedule
+                        taken: false,
+                        notificationsSent: []
+                    }
+                ],
+                state: 'ongoing',
+                strictnessLevel: 'medium'
+            };
+
+            (Medicament.findById as jest.Mock).mockResolvedValue(null);
+
+            (User.findById as jest.Mock).mockResolvedValue({ _id: invalidTreatmentData.userId });
+
+            await expect(createTreatment(invalidTreatmentData as ITreatment))
+                .rejects
+                .toThrow(`Error while creating treatment: Error while validating treatment: Medicament with ID ${invalidTreatmentData.medications[0].medicamentId} does not exist`
+                );
         });
     });
 
